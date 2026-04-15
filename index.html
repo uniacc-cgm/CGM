@@ -33,6 +33,7 @@
         
         .ratio-16-9 { aspect-ratio: 16 / 9; }
         .ratio-carta { aspect-ratio: 1 / 1.3; }
+        .ratio-carta-horizontal { aspect-ratio: 1.3 / 1; }
         .ratio-square { aspect-ratio: 1 / 0.85; }
         .ratio-ia-box { aspect-ratio: 1 / 0.4; }
         .ratio-infografia { aspect-ratio: 1 / 1.4; }
@@ -65,6 +66,7 @@
 
         .check-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px; border-radius: 6px; transition: background 0.2s; cursor: pointer; }
         .check-item:hover { background-color: #f8faff; }
+        .check-item span { transition: all 0.2s; }
         .check-item input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; cursor: pointer; accent-color: #2c66ff; }
         .check-item input:checked + span { color: #9ca3af; text-decoration: line-through; }
 
@@ -129,7 +131,7 @@
                         <span class="text-xl">🛠️</span>
                         <div>
                             <h3 class="font-bold text-sm">Usa los recursos oficiales</h3>
-                            <p class="text-[11px] text-gray-500">En el menú lateral encontrarás las plantillas actualizadas, el sistema de color institucional y la <b>IA Toolbox</b> aprobada.</p>
+                            <p class="text-[11px] text-gray-500">En el menú lateral encontrarás las plantillas actualizadas, el sistema de color institucional y la IA Toolbox aprobada.</p>
                         </div>
                     </div>
                 </div>
@@ -147,7 +149,7 @@
         </div>
         <div class="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar" id="newsContainer"></div>
         <div class="p-6 border-t border-gray-100 bg-gray-50 text-[10px] text-gray-400 text-center">
-            Próxima depuración programada: <b>Junio 2026</b>
+            Última edición: 15 de abril, 2026
         </div>
     </aside>
 
@@ -169,6 +171,7 @@
                 <div class="h-px bg-white/5 my-4"></div>
                 <button onclick="filterSelection('cat-01', this)" class="nav-link">01 Académicos</button>
                 <button onclick="filterSelection('cat-02', this)" class="nav-link">02 Recursos base</button>
+                <button onclick="filterSelection('cat-03', this)" class="nav-link">03 Plantillas</button>
                 <button onclick="filterSelection('cat-04', this)" class="nav-link">04 Infografías</button>
                 <button onclick="filterSelection('cat-06', this)" class="nav-link">06 Video y animación</button>
                 <button onclick="filterSelection('cat-07', this)" class="nav-link">07 Podcast</button>
@@ -182,7 +185,7 @@
 
             <div class="p-6 border-t border-white/5">
                 <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold text-center">
-                    Última edición: <span style="color: #F5F5F5;">09 de abril</span>, 2026
+                    Última edición: <span style="color: #F5F5F5;">15 de abril</span>, 2026
                 </p>
             </div>
         </aside>
@@ -191,7 +194,7 @@
             <header class="h-24 flex items-center justify-between px-10 bg-white border-b border-gray-200 shadow-sm z-10">
                 
                 <div class="flex-1">
-                    </div>
+                </div>
                 
                 <div class="flex items-center gap-4">
                     <button onclick="openRules()" class="text-[10px] font-bold uppercase text-gray-400 hover:text-davda-primary transition-colors flex items-center gap-2">
@@ -240,6 +243,7 @@
                                 <li><b>Gestión de tipografías:</b> Si la presentación debe ser compartida en formato editable, verifica que las fuentes institucionales estén incrustadas en el archivo, o utiliza únicamente las tipografías seguras del sistema definidas en el manual de marca para evitar desconfiguraciones.</li>
                                 <li><b>Optimización de recursos gráficos:</b> Comprime las imágenes directamente desde las opciones de PowerPoint antes de guardar el archivo final. Esto evita presentaciones excesivamente pesadas que dificulten su distribución en plataformas de aprendizaje o por correo.</li>
                                 <li><b>Relación de aspecto:</b> Respeta siempre el formato panorámico <u>(16:9)</u> predeterminado en la plantilla. No modifiques el tamaño de la diapositiva, ya que esto distorsionará los fondos y logotipos bloqueados en el patrón de diapositivas.</li>
+                                <li><b>Reemplazo de imágenes:</b> Para modificar la figura principal sin alterar el diseño base, utiliza siempre la opción <u>Reemplazar imagen</u>. Puedes insertar una fotografía de la carpeta <u>Personas fondo transparente</u> o generar una nueva imagen que sea más pertinente a la temática abordada.</li>
                             </ul>
                         </div>
                     </div>
@@ -250,8 +254,9 @@
                                 <img src="img/ppt_azul.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">PPT azul</h3>
-                                <a href="https://drive.google.com/open?id=1ijAHEe_1aib7E-bRF8iPloUogOPFw-MF" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1ijAHEe_1aib7E-bRF8iPloUogOPFw-MF" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -260,8 +265,9 @@
                                 <img src="img/ppt_amarillo.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">PPT amarillo</h3>
-                                <a href="https://drive.google.com/open?id=1VHHgj5itO9E9Ub8Bbn-2hiMAty3LTY_D" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1VHHgj5itO9E9Ub8Bbn-2hiMAty3LTY_D" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -270,8 +276,9 @@
                                 <img src="img/ppt_magenta.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">PPT magenta</h3>
-                                <a href="https://drive.google.com/open?id=1IqA69CPv84DJS-xEQ-Fe9J0-wep7AcE0" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1IqA69CPv84DJS-xEQ-Fe9J0-wep7AcE0" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                     </div>
@@ -289,6 +296,7 @@
                                 <li><b>Bloqueo de formato base:</b> No modifiques los parámetros estructurales de la plantilla. Los márgenes, el interlineado, los encabezados y los pies de página deben permanecer idénticos al archivo maestro para garantizar la uniformidad en toda la documentación.</li> 
                                 <li><b>Accesibilidad en imágenes:</b> Si insertas gráficos, infografías o fotografías como apoyo visual, asegúrate de aplicarles la opción <u>>"En línea con el texto"</u> para evitar que floten y desordenen el documento al cambiar de página.</li> 
                                 <li><b>Exportación final:</b> A menos que se solicite explícitamente un formato editable para trabajo colaborativo, todo documento finalizado debe exportarse y distribuirse en formato PDF para "congelar" el diseño y evitar alteraciones no autorizadas.</li> 
+                                <li><b>Reemplazo de imágenes:</b> Para modificar la figura principal sin alterar el diseño base, utiliza siempre la opción <u>Reemplazar imagen</u>. Puedes insertar una fotografía de la carpeta <u>Personas fondo transparente</u> o generar una nueva imagen que sea más pertinente a la temática abordada.</li>
                             </ul>
                         </div>
                     </div>
@@ -299,8 +307,9 @@
                                 <img src="img/carta_azul.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Carta azul</h3>
-                                <a href="https://drive.google.com/open?id=1x4YfZBHR6TM6hUuVrp0X0GMbxbBvuYwO" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1x4YfZBHR6TM6hUuVrp0X0GMbxbBvuYwO" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -309,8 +318,9 @@
                                 <img src="img/carta_amarillo.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Carta amarillo</h3>
-                                <a href="https://drive.google.com/open?id=1AYtHjTq8g7OjU3rY8c42L7lvtwTVie1f" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1AYtHjTq8g7OjU3rY8c42L7lvtwTVie1f" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -319,8 +329,9 @@
                                 <img src="img/carta_magenta.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Carta magenta</h3>
-                                <a href="https://drive.google.com/open?id=1NpcbclJ8DJKh-mbXxulWUAkk2i44V3Fy" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1NpcbclJ8DJKh-mbXxulWUAkk2i44V3Fy" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -329,8 +340,9 @@
                                 <img src="img/carta_impresion.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Carta impresión</h3>
-                                <a href="https://drive.google.com/open?id=1jAgDFTX2dXGNHM9gE5L7HEZguChw1euK" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1jAgDFTX2dXGNHM9gE5L7HEZguChw1euK" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                     </div>
@@ -338,33 +350,36 @@
                     <h2 class="section-title cat-01">Cartas horizontales</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-01 mb-12">
                         <div class="card-asset">
-                            <div class="thumb-container ratio-16-9">
+                            <div class="thumb-container ratio-carta-horizontal">
                                 <span class="tag-format">Google Docs</span>
                                 <img src="img/horiz_azul.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Carta horizontal azul</h3>
-                                <a href="https://drive.google.com/open?id=1VSN6fVu0tBC0xsPdVxDJMUJTDOaCxK4c" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1VSN6fVu0tBC0xsPdVxDJMUJTDOaCxK4c" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                         <div class="card-asset">
-                            <div class="thumb-container ratio-16-9">
+                            <div class="thumb-container ratio-carta-horizontal">
                                 <span class="tag-format">Google Docs</span>
                                 <img src="img/horiz_amarillo.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Carta horizontal amarillo</h3>
-                                <a href="https://drive.google.com/open?id=1GDaGPphLXjBAJBOkUAIZ3rFEajo7LdYc" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1GDaGPphLXjBAJBOkUAIZ3rFEajo7LdYc" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                         <div class="card-asset">
-                            <div class="thumb-container ratio-16-9">
+                            <div class="thumb-container ratio-carta-horizontal">
                                 <span class="tag-format">Google Docs</span>
                                 <img src="img/horiz_magenta.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Carta horizontal magenta</h3>
-                                <a href="https://drive.google.com/open?id=1BRwIk4l7MrWiHlJ892Bp-5NOW1p5xZaK" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1BRwIk4l7MrWiHlJ892Bp-5NOW1p5xZaK" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                     </div>
@@ -391,28 +406,31 @@
                                 <img src="img/genially_azul.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Genially azul</h3>
-                                <a href="https://app.genially.com/editor/6997645453b4daa14b3d0476" target="_blank" class="btn-action"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                                <a href="https://app.genially.com/editor/6997645453b4daa14b3d0476" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
                         <div class="card-asset">
                             <div class="thumb-container ratio-16-9">
                                 <span class="tag-format">Web</span>
-                                <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
+                                <img src="img/genially_amarillo.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
-                                <h3 class="font-bold mb-5 text-[13px] text-gray-400">Genially amarillo</h3>
-                                <span class="btn-disabled"><i class="fas fa-lock"></i> No disponible</span>
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Genially amarillo</h3>
+                                <a href="https://app.genially.com/editor/69dfc27aa30bfb2cca57f3e8" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
                         <div class="card-asset">
                             <div class="thumb-container ratio-16-9">
                                 <span class="tag-format">Web</span>
-                                <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
+                                <img src="img/genially_magenta.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
-                                <h3 class="font-bold mb-5 text-[13px] text-gray-400">Genially magenta</h3>
-                                <span class="btn-disabled"><i class="fas fa-lock"></i> No disponible</span>
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Genially magenta</h3>
+                                <a href="https://app.genially.com/editor/69dfdf4fa30bfb2cca6966a3" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
                     </div>
@@ -421,22 +439,35 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-01 mb-12">
                         <div class="card-asset">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Zip</span>
-                                <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
+                                <span class="tag-format">Jpg</span>
+                                <img src="img/imagenes_genericas.jpg" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
-                                <h3 class="font-bold mb-5 text-[13px] text-gray-400">Imágenes genéricas</h3>
-                                <span class="btn-disabled"><i class="fas fa-lock"></i> No disponible</span>
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Imágenes genéricas</h3>
+                                <a href="https://drive.google.com/drive/u/1/folders/1cgt2trW6HnT8Cxjv3ok65WItu_GMEidi" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                         <div class="card-asset">
                             <div class="thumb-container ratio-16-9">
                                 <span class="tag-format">Png</span>
-                                <img src="img/personas_transparente.png" class="thumb-img cover-img">
+                                <img src="img/personas_transparente.jpg" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Personas fondo transparente</h3>
-                                <a href="https://drive.google.com/open?id=1KuEjevqPC9pCDDSLSow2nVuZ5Pu8M4uu" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1KuEjevqPC9pCDDSLSow2nVuZ5Pu8M4uu" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
+                            </div>
+                        </div>
+                        <div class="card-asset">
+                            <div class="thumb-container ratio-16-9">
+                                <span class="tag-format">Mp4</span>
+                                <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
+                                <h3 class="font-bold mb-5 text-[13px] text-gray-400">Videos genéricos</h3>
+                                <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
                             </div>
                         </div>
                     </div>
@@ -449,8 +480,9 @@
                                 <img src="img/recurso_logo.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">02 Recursos base</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Logo institucional</h3>
-                                <a href="https://drive.google.com/open?id=1yS0Mhy2prwy5ghEVuJXrHKeKLucFKVvj" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1yS0Mhy2prwy5ghEVuJXrHKeKLucFKVvj" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -459,8 +491,9 @@
                                 <img src="img/recurso_font.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">02 Recursos base</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Tipografía Montserrat</h3>
-                                <a href="https://fonts.google.com/specimen/Montserrat" target="_blank" class="btn-action"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                                <a href="https://fonts.google.com/specimen/Montserrat" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -469,8 +502,9 @@
                                 <img src="img/recurso_icons.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">02 Recursos base</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Iconos Google</h3>
-                                <a href="https://fonts.google.com/icons" target="_blank" class="btn-action"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                                <a href="https://fonts.google.com/icons" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -479,8 +513,24 @@
                                 <img src="img/recurso_palette.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">02 Recursos base</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Paleta oficial</h3>
-                                <a href="https://uniacc-cgm.github.io/CGM/" target="_blank" class="btn-action"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                                <a href="https://uniacc-cgm.github.io/CGM/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h2 class="section-title cat-03">Plantillas</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-03 mb-12">
+                        <div class="card-asset">
+                            <div class="thumb-container ratio-16-9">
+                                <span class="tag-format">Archivos</span>
+                                <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">03 Plantillas</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Plantillas Originales</h3>
+                                <a href="https://drive.google.com/drive/u/1/folders/13Kpxq1osV76y3GZ0-Y0HACQzCtz77vU2" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                     </div>
@@ -490,11 +540,12 @@
                         <div class="card-asset">
                             <div class="thumb-container ratio-infografia">
                                 <span class="tag-format">Ai</span>
-                                <img src="img/infografia_web.png" class="thumb-img opacity-30 grayscale full-img">
+                                <img src="img/infografia_web.png" class="thumb-img full-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
-                                <h3 class="font-bold mb-5 text-[13px] text-gray-400">Infografía web</h3>
-                                <span class="btn-disabled"><i class="fas fa-lock"></i> No disponible</span>
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">04 Infografías</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Infografía web</h3>
+                                <a href="https://drive.google.com/drive/u/1/folders/11Zgzr88RYrY2zh7If_Q_HxP8dKzKYnuY" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -503,8 +554,9 @@
                                 <img src="img/infografia_pdf.png" class="full-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">04 Infografías</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Infografía PDF</h3>
-                                <a href="https://drive.google.com/open?id=1nT_Be1SnCZtWD3GzH_ofaclLaNcNHtrn&usp=drive_fs" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1nT_Be1SnCZtWD3GzH_ofaclLaNcNHtrn&usp=drive_fs" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                     </div>
@@ -519,7 +571,7 @@
                             <ul class="list-disc list-inside space-y-3">
                                 <li><b>Archivos entregables:</b> No se requiere subir el proyecto editable, solo el material final renderizado en formato MP4, miniatura para YouTube y el archivo de subtítulos exportado desde Premiere Pro.</li>
                                 <li><b>Uso de plantilla gráfica (MOGRT):</b> La plantilla se utilizará exclusivamente para la intro. Solo debe cambiarse el título del video y alternar la música de la intro y cierre entre las 3 opciones disponibles.</li>
-                                <li><b>Márgenes de seguridad y accesibilidad:</b> Respeta escrupulosamente los márgenes seguros (Safe Margins). Mantén el tercio inferior despejado de logotipos o información crítica para garantizar que los subtítulos de las plataformas de educación o recuadros de intérprete no tapen contenido relevante.</li>
+                                <li><b>Márgenes de seguridad y accesibilidad:</b> Respeta escrupulosamente los márgenes seguros (Safe Margins). Mantén el tercio inferior despejado de logotipos para garantizar que los subtítulos no tapen contenido relevante.</li>
                                 <li><b>Exportación y compresión:</b> Renderiza las versiones finales de video en formato MP4, garantizando que el peso del archivo final sea ágil para la carga rápida en plataformas sin sacrificar la nitidez de los elementos gráficos.</li>
                             </ul>
                         </div>
@@ -531,8 +583,31 @@
                                 <img src="img/pack_azul.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
-                                <h3 class="font-bold mb-5 text-[13px]">Pack videos azul (Activo)</h3>
-                                <a href="https://drive.google.com/open?id=1yCH-vehrB_eu8yhJev_zk9nAHnWG9qv3&usp=drive_fs" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">06 Video y animación</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Pack videos azul</h3>
+                                <a href="https://drive.google.com/open?id=1yCH-vehrB_eu8yhJev_zk9nAHnWG9qv3&usp=drive_fs" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
+                            </div>
+                        </div>
+                        <div class="card-asset">
+                            <div class="thumb-container ratio-16-9">
+                                <span class="tag-format">.prproj</span>
+                                <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">06 Video y animación</span>
+                                <h3 class="font-bold mb-5 text-[13px] text-gray-400">Pack videos amarillo</h3>
+                                <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
+                            </div>
+                        </div>
+                        <div class="card-asset">
+                            <div class="thumb-container ratio-16-9">
+                                <span class="tag-format">.prproj</span>
+                                <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">06 Video y animación</span>
+                                <h3 class="font-bold mb-5 text-[13px] text-gray-400">Pack videos magenta</h3>
+                                <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -541,8 +616,9 @@
                                 <img src="img/logo_animado.gif" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">06 Video y animación</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Logo animado</h3>
-                                <a href="#" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="#" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -551,8 +627,9 @@
                                 <img src="img/storyboard.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">06 Video y animación</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Storyboard video</h3>
-                                <a href="https://drive.google.com/open?id=1p0VYpZAnkn8tHadw_TR1QPfIiHk4pXux&usp=drive_fs" target="_blank" class="btn-action"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/open?id=1p0VYpZAnkn8tHadw_TR1QPfIiHk4pXux&usp=drive_fs" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                     </div>
@@ -565,8 +642,9 @@
                                 <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">07 Podcast</span>
                                 <h3 class="font-bold mb-5 text-[13px] text-gray-400">Música intro/cierre</h3>
-                                <span class="btn-disabled"><i class="fas fa-lock"></i> No disponible</span>
+                                <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -575,8 +653,9 @@
                                 <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">07 Podcast</span>
                                 <h3 class="font-bold mb-5 text-[13px] text-gray-400">Miniaturas Podcast</h3>
-                                <span class="btn-disabled"><i class="fas fa-lock"></i> No disponible</span>
+                                <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
                             </div>
                         </div>
                     </div>
@@ -589,6 +668,7 @@
                                 <img src="img/ia_upscayl.png" class="thumb-img full-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 IA Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Upscayl</h3>
                                 <p class="text-[10px] leading-tight text-gray-500 mb-4">Aumenta la resolución mediante IA sin perder calidad.</p>
                                 <a href="https://upscayl.org/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
@@ -597,9 +677,10 @@
                         <div class="card-asset">
                             <div class="thumb-container ratio-ia-box">
                                 <span class="tag-format">Ia</span>
-                                <img src="img/ia_firefly.png" class="thumb-img contain-img">
+                                <img src="img/ia_firefly.jpg" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 IA Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Adobe Firefly</h3>
                                 <p class="text-[10px] leading-tight text-gray-500 mb-4">Generación y edición de imágenes mediante prompts de texto.</p>
                                 <a href="https://firefly.adobe.com/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
@@ -611,6 +692,7 @@
                                 <img src="img/ia_cleanup.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 IA Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Cleanup.pictures</h3>
                                 <p class="text-[10px] leading-tight text-gray-500 mb-4">Elimina objetos o personas de cualquier fotografía rápidamente.</p>
                                 <a href="https://cleanup.pictures/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
@@ -622,6 +704,7 @@
                                 <img src="img/ia_podcast.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 IA Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Adobe Podcast</h3>
                                 <p class="text-[10px] leading-tight text-gray-500 mb-4">Limpia el ruido de fondo de audios para calidad de estudio.</p>
                                 <a href="https://podcast.adobe.com/a" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
@@ -637,8 +720,9 @@
                                 <img src="img/tutoriales.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">09 Tutoriales</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Playlist de YouTube</h3>
-                                <a href="https://www.youtube.com/playlist?list=PLxWyIET13hPtKcU5xyPv3pt_K4KApgRYi" target="_blank" class="btn-action"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                                <a href="https://www.youtube.com/playlist?list=PLxWyIET13hPtKcU5xyPv3pt_K4KApgRYi" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
                     </div>
@@ -651,8 +735,9 @@
                                 <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">10 Casos de éxito</span>
                                 <h3 class="font-bold mb-5 text-[13px] text-gray-400">Ejemplo aplicado 01</h3>
-                                <span class="btn-disabled"><i class="fas fa-lock"></i> No disponible</span>
+                                <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
                             </div>
                         </div>
                         <div class="card-asset">
@@ -661,8 +746,9 @@
                                 <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">10 Casos de éxito</span>
                                 <h3 class="font-bold mb-5 text-[13px] text-gray-400">Ejemplo aplicado 02</h3>
-                                <span class="btn-disabled"><i class="fas fa-lock"></i> No disponible</span>
+                                <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
                             </div>
                         </div>
                     </div>
@@ -676,7 +762,7 @@
 
             <footer class="bg-white border-t border-gray-200 p-3 text-center">
                 <p class="text-[11px] text-gray-500 footer-text">
-                    Dudas o sugerencias: contactar al Coordinador de Gráfica Multimedia, Felipe Hernández vía mail <a href="mailto:felipe.hernandez@uniacc.cl" class="text-davda-primary font-extrabold hover:underline">felipe.hernandez@uniacc.cl</a> o Microsoft Teams.
+                    Dudas o sugerencias: contactar al Coordinador de Gráfica Multimedia, <a href="mailto:felipe.hernandez@uniacc.cl" class="text-davda-primary font-bold hover:underline">felipe.hernandez@uniacc.cl</a> o Microsoft Teams.
                 </p>
             </footer>
         </main>
@@ -696,6 +782,8 @@
         };
 
         const novedadesData = [
+            { fecha: "15 de abril, 2026", titulo: "Actualización de Recursos y Consideraciones", desc: "Se agregaron nuevos packs de video y se actualizaron las consideraciones de uso para PPT y Word.", tipo: "Mejora" },
+            { fecha: "14 de abril, 2026", titulo: "Actualización de Plantillas y Contacto", desc: "Integración de la nueva carpeta de plantillas originales y enlace de contacto directo en footer.", tipo: "Mejora" },
             { fecha: "09 de abril, 2026", titulo: "Sistema de Color e interactividad", desc: "Integración del panel dinámico para facilitar el uso de la paleta oficial.", tipo: "Mejora" }
         ];
 
@@ -737,7 +825,6 @@
             document.getElementById('repositoryGrid').style.display = 'block';
             document.getElementById('independentPage').style.display = 'none';
 
-            // Actualizar botones del menú lateral
             document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active-filter'));
             if (btn) {
                 btn.classList.add('active-filter');
@@ -745,7 +832,6 @@
                 document.getElementById('btnAll').classList.add('active-filter');
             }
 
-            // Seleccionar los contenedores padre de cada sección
             const elementsToFilter = document.querySelectorAll(".section-title, .considerations-box, .grid");
 
             if (c === "all" || c === "") {
