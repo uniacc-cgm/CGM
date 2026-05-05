@@ -14,7 +14,7 @@
                 extend: {
                     fontFamily: { sans: ['Montserrat', 'sans-serif'] },
                     colors: { 
-                        davda: { primary: '#2c66ff', bg: '#f5f5f5', dark: '#3d3838', grafito: '#3d3838', amarillo: '#eab308', magenta: '#ff01ff' } 
+                        davda: { primary: '#2c66ff', bg: '#f5f5f5', dark: '#3d3838', grafito: '#3d3838', amarillo: '#ffa500', magenta: '#ff01ff' } 
                     }
                 }
             }
@@ -34,7 +34,7 @@
         .ratio-16-9 { aspect-ratio: 16 / 9; }
         .ratio-carta { aspect-ratio: 1 / 1.3; }
         .ratio-carta-horizontal { aspect-ratio: 1.3 / 1; }
-        .ratio-square { aspect-ratio: 1 / 0.85; }
+        .ratio-square { aspect-ratio: 1 / 1; }
         .ratio-ia-box { aspect-ratio: 1 / 0.4; }
         .ratio-infografia { aspect-ratio: 1 / 1.4; }
         
@@ -43,7 +43,9 @@
         .contain-img { object-fit: contain; }
         .full-img { object-fit: cover; width: 100%; height: 100%; }
         
-        .tag-format { position: absolute; top: 8px; right: 8px; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 800; color: white; background-color: #3d3838; z-index: 10; text-transform: capitalize; }
+        /* Etiquetas dinámicas */
+        .tag-format { position: absolute; top: 8px; right: 8px; padding: 2px 6px; border-radius: 4px; font-size: 10px; font-weight: 800; color: white; background-color: #3d3838; z-index: 10; text-transform: capitalize; cursor: pointer; transition: background 0.2s, transform 0.2s; }
+        .tag-format:hover { background-color: #2c66ff; transform: scale(1.05); }
         
         .considerations-box { background-color: #ffffff; border-left: 4px solid #2c66ff; margin-bottom: 32px; grid-column: 1 / -1; border-radius: 0 8px 8px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden; }
         .cons-header { padding: 16px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
@@ -77,14 +79,12 @@
         .news-badge { position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; border: 2px solid white; }
         .news-badge.hidden { display: none; }
 
-        .footer-text { text-transform: none !important; font-variant: normal !important; }
-
-        /* Banner y Modal de Reglas */
         #rulesBanner { background: #2c66ff; color: white; padding: 16px 24px; border-radius: 12px; margin-bottom: 32px; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.2s; }
         #rulesBanner:hover { background: #1a54f0; }
         
         #rulesModal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 300; display: none; align-items: center; justify-content: center; padding: 20px; }
         .modal-content { background: white; max-width: 500px; width: 100%; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+        .footer-text { text-transform: none !important; font-variant: normal !important; }
 
         #independentPage { display: none; }
         .color-page-container { max-width: 1200px; margin: 0 auto; color: #3d3838; }
@@ -131,7 +131,7 @@
                         <span class="text-xl">🛠️</span>
                         <div>
                             <h3 class="font-bold text-sm">Usa los recursos oficiales</h3>
-                            <p class="text-[11px] text-gray-500">En el menú lateral encontrarás las plantillas actualizadas, el sistema de color institucional y la IA Toolbox aprobada.</p>
+                            <p class="text-[11px] text-gray-500">En el menú lateral encontrarás las plantillas actualizadas, el sistema de color institucional y la Toolbox aprobada.</p>
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
         </div>
         <div class="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar" id="newsContainer"></div>
         <div class="p-6 border-t border-gray-100 bg-gray-50 text-[10px] text-gray-400 text-center">
-            Última edición: 17 de abril, 2026
+            Próxima depuración programada: <b>Junio 2026</b>
         </div>
     </aside>
 
@@ -175,24 +175,24 @@
                 <button onclick="filterSelection('cat-04', this)" class="nav-link">04 Infografías</button>
                 <button onclick="filterSelection('cat-06', this)" class="nav-link">06 Video y animación</button>
                 <button onclick="filterSelection('cat-07', this)" class="nav-link">07 Podcast</button>
-                <button onclick="filterSelection('cat-08', this)" class="nav-link">08 IA Toolbox</button>
+                <button onclick="filterSelection('cat-08', this)" class="nav-link">08 Multimedia Toolbox</button>
                 <button onclick="filterSelection('cat-09', this)" class="nav-link">09 Tutoriales</button>
                 <button onclick="filterSelection('cat-10', this)" class="nav-link">10 Casos de éxito</button>
                 <div class="h-px bg-white/5 my-4"></div>
+                <button onclick="showIndependent('manual', this)" class="nav-link"><i class="fas fa-book mr-3"></i> Manual de identidad visual</button>
                 <button onclick="showIndependent('color', this)" class="nav-link"><i class="fas fa-palette mr-3"></i> Sistema de color</button>
                 <button onclick="showIndependent('checklist', this)" class="nav-link"><i class="fas fa-tasks mr-3"></i> Check list de calidad</button>
             </nav>
 
             <div class="p-6 border-t border-white/5">
                 <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold text-center">
-                    Última edición: <span style="color: #F5F5F5;">15 de abril</span>, 2026
+                    Última edición: <span style="color: #F5F5F5;">05 de mayo</span>, 2026
                 </p>
             </div>
         </aside>
 
         <main class="flex-1 flex flex-col bg-davda-bg">
             <header class="h-24 flex items-center justify-between px-10 bg-white border-b border-gray-200 shadow-sm z-10">
-                
                 <div class="flex-1">
                 </div>
                 
@@ -203,7 +203,7 @@
                     <div class="flex gap-2 p-2 bg-gray-50 border rounded-lg items-center text-[10px] font-semibold text-davda-grafito">
                         <span class="text-gray-400 uppercase mr-1">Paleta HEX:</span>
                         <button onclick="copyToClipboard('#2c66ff')" class="w-5 h-5 bg-[#2c66ff] rounded shadow-sm hover:scale-110 transition-transform"></button>
-                        <button onclick="copyToClipboard('#eab308')" class="w-5 h-5 bg-[#eab308] rounded shadow-sm hover:scale-110 transition-transform"></button>
+                        <button onclick="copyToClipboard('#ffa500')" class="w-5 h-5 bg-[#ffa500] rounded shadow-sm hover:scale-110 transition-transform"></button>
                         <button onclick="copyToClipboard('#ff01ff')" class="w-5 h-5 bg-[#ff01ff] rounded shadow-sm hover:scale-110 transition-transform"></button>
                         <button onclick="copyToClipboard('#F5F5F5')" class="w-5 h-5 bg-[#F5F5F5] rounded border shadow-sm hover:scale-110 transition-transform"></button>
                         <button onclick="copyToClipboard('#3d3838')" class="w-5 h-5 bg-[#3d3838] rounded shadow-sm hover:scale-110 transition-transform"></button>
@@ -230,6 +230,7 @@
 
                 <div id="mainGrid">
 
+                    <!-- SECCIÓN 01: ACADÉMICOS -->
                     <h2 class="section-title cat-01">Presentaciones PPT</h2>
                     <div class="considerations-box cat-01" style="border-left-color: #2c66ff;">
                         <div class="cons-header" onclick="toggleCons(this)">
@@ -244,13 +245,14 @@
                                 <li><b>Optimización de recursos gráficos:</b> Comprime las imágenes directamente desde las opciones de PowerPoint antes de guardar el archivo final. Esto evita presentaciones excesivamente pesadas que dificulten su distribución en plataformas de aprendizaje o por correo.</li>
                                 <li><b>Relación de aspecto:</b> Respeta siempre el formato panorámico <u>(16:9)</u> predeterminado en la plantilla. No modifiques el tamaño de la diapositiva, ya que esto distorsionará los fondos y logotipos bloqueados en el patrón de diapositivas.</li>
                                 <li><b>Reemplazo de imágenes:</b> Para modificar la figura principal sin alterar el diseño base, utiliza siempre la opción <u>Reemplazar imagen</u>. Puedes insertar una fotografía de la carpeta <u>Personas fondo transparente</u> o generar una nueva imagen que sea más pertinente a la temática abordada.</li>
+                                <li>Si el documento presenta problemas (por ejemplo, imágenes que no se visualizan), se recomienda borrar caché y cookies o cambiar de navegador.</li>
                             </ul>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-01 mb-12">
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Google Slides</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Google Slides</span>
                                 <img src="img/ppt_azul.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -259,9 +261,9 @@
                                 <a href="https://drive.google.com/open?id=1ijAHEe_1aib7E-bRF8iPloUogOPFw-MF" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Google Slides</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Google Slides</span>
                                 <img src="img/ppt_amarillo.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -270,9 +272,9 @@
                                 <a href="https://drive.google.com/open?id=1VHHgj5itO9E9Ub8Bbn-2hiMAty3LTY_D" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Google Slides</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Google Slides</span>
                                 <img src="img/ppt_magenta.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -284,7 +286,7 @@
                     </div>
 
                     <h2 class="section-title cat-01">Documentos Word</h2>
-                    <div class="considerations-box cat-01" style="border-left-color: #eab308;">
+                    <div class="considerations-box cat-01" style="border-left-color: #ffa500;">
                         <div class="cons-header" onclick="toggleCons(this)">
                             <strong class="text-davda-amarillo">Word • Consideraciones de uso</strong>
                             <i class="fas fa-chevron-down"></i>
@@ -294,16 +296,18 @@
                                 <li><b>Integridad del máster:</b> Al igual que con las presentaciones, nunca sobrescribas el documento original del repositorio. Genera tu material de trabajo utilizando exclusivamente la opción <u>Archivo > Hacer una copia.</u></li> 
                                 <li><b>Uso estricto de estilos predefinidos:</b> Estructura tu documento utilizando únicamente el panel de <u>"Estilos"</u> ya configurados (título 1, título 2, cuerpo de texto, etc.). Está prohibido aplicar negritas, colores o cambios de tamaño de forma manual para simular títulos. </li> 
                                 <li><b>Bloqueo de formato base:</b> No modifiques los parámetros estructurales de la plantilla. Los márgenes, el interlineado, los encabezados y los pies de página deben permanecer idénticos al archivo maestro para garantizar la uniformidad en toda la documentación.</li> 
-                                <li><b>Accesibilidad en imágenes:</b> Si insertas gráficos, infografías o fotografías como apoyo visual, asegúrate de aplicarles la opción <u>>"En línea con el texto"</u> para evitar que floten y desordenen el documento al cambiar de página.</li> 
+                                <li><b>Accesibilidad en imágenes:</b> Si insertas gráficos, infografías o fotografías como apoyo visual, asegúrate de aplicarles la opción <u>"En línea con el texto"</u> para evitar que floten y desordenen el documento al cambiar de página.</li> 
                                 <li><b>Exportación final:</b> A menos que se solicite explícitamente un formato editable para trabajo colaborativo, todo documento finalizado debe exportarse y distribuirse en formato PDF para "congelar" el diseño y evitar alteraciones no autorizadas.</li> 
                                 <li><b>Reemplazo de imágenes:</b> Para modificar la figura principal sin alterar el diseño base, utiliza siempre la opción <u>Reemplazar imagen</u>. Puedes insertar una fotografía de la carpeta <u>Personas fondo transparente</u> o generar una nueva imagen que sea más pertinente a la temática abordada.</li>
+                                <li>Si el documento presenta problemas (por ejemplo, imágenes que no se visualizan), se recomienda borrar caché y cookies o cambiar de navegador.</li>
+                                <li>Si el PDF no se exporta correctamente, utilice la ruta: Archivo → Imprimir → Guardar como PDF.</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 cat-01 mb-12">
-                        <div class="card-asset">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-01 mb-12">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-carta">
-                                <span class="tag-format">Google Docs</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Google Docs</span>
                                 <img src="img/carta_azul.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -312,9 +316,9 @@
                                 <a href="https://drive.google.com/open?id=1x4YfZBHR6TM6hUuVrp0X0GMbxbBvuYwO" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-carta">
-                                <span class="tag-format">Google Docs</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Google Docs</span>
                                 <img src="img/carta_amarillo.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -323,9 +327,9 @@
                                 <a href="https://drive.google.com/open?id=1AYtHjTq8g7OjU3rY8c42L7lvtwTVie1f" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-carta">
-                                <span class="tag-format">Google Docs</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Google Docs</span>
                                 <img src="img/carta_magenta.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -334,24 +338,13 @@
                                 <a href="https://drive.google.com/open?id=1NpcbclJ8DJKh-mbXxulWUAkk2i44V3Fy" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
-                            <div class="thumb-container ratio-carta">
-                                <span class="tag-format">Google Docs</span>
-                                <img src="img/carta_impresion.png" class="thumb-img contain-img">
-                            </div>
-                            <div class="p-5 flex flex-col flex-1">
-                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
-                                <h3 class="font-bold mb-5 text-[13px]">Carta impresión</h3>
-                                <a href="https://drive.google.com/open?id=1jAgDFTX2dXGNHM9gE5L7HEZguChw1euK" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
-                            </div>
-                        </div>
                     </div>
 
                     <h2 class="section-title cat-01">Cartas horizontales</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-01 mb-12">
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-carta-horizontal">
-                                <span class="tag-format">Google Docs</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Google Docs</span>
                                 <img src="img/horiz_azul.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -360,9 +353,9 @@
                                 <a href="https://drive.google.com/open?id=1VSN6fVu0tBC0xsPdVxDJMUJTDOaCxK4c" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-carta-horizontal">
-                                <span class="tag-format">Google Docs</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Google Docs</span>
                                 <img src="img/horiz_amarillo.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -371,9 +364,9 @@
                                 <a href="https://drive.google.com/open?id=1GDaGPphLXjBAJBOkUAIZ3rFEajo7LdYc" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-carta-horizontal">
-                                <span class="tag-format">Google Docs</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Google Docs</span>
                                 <img src="img/horiz_magenta.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -385,7 +378,7 @@
                     </div>
 
                     <h2 class="section-title cat-01">Genially</h2>
-                    <div class="considerations-box cat-01" style="border-left-color: #db2777;">
+                    <div class="considerations-box cat-01" style="border-left-color: #ff01ff;">
                         <div class="cons-header" onclick="toggleCons(this)">
                             <strong class="text-davda-magenta">Genially • Consideraciones de uso</strong>
                             <i class="fas fa-chevron-down"></i>
@@ -400,9 +393,9 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-01 mb-12">
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Web</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Web</span>
                                 <img src="img/genially_azul.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -411,9 +404,9 @@
                                 <a href="https://app.genially.com/editor/6997645453b4daa14b3d0476" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Web</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Web</span>
                                 <img src="img/genially_amarillo.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -422,9 +415,9 @@
                                 <a href="https://app.genially.com/editor/69dfc27aa30bfb2cca57f3e8" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Web</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Web</span>
                                 <img src="img/genially_magenta.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -437,9 +430,9 @@
 
                     <h2 class="section-title cat-01">Recursos comunes</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-01 mb-12">
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Jpg</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Jpg</span>
                                 <img src="img/imagenes_genericas.jpg" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -448,9 +441,9 @@
                                 <a href="https://drive.google.com/drive/u/1/folders/1cgt2trW6HnT8Cxjv3ok65WItu_GMEidi" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Png</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Jpg</span>
                                 <img src="img/personas_transparente.jpg" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -459,24 +452,25 @@
                                 <a href="https://drive.google.com/open?id=1KuEjevqPC9pCDDSLSow2nVuZ5Pu8M4uu" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-01">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Mp4</span>
-                                <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Mp4</span>
+                                <img src="img/videos_genericos.jpg" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">01 Académicos</span>
-                                <h3 class="font-bold mb-5 text-[13px] text-gray-400">Videos genéricos</h3>
-                                <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Videos genéricos</h3>
+                                <a href="https://drive.google.com/drive/u/1/folders/1xTwSFieSxmh94B6NOMb6IRKPlMIUl1je" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                     </div>
 
+                    <!-- SECCIÓN 02: RECURSOS BASE -->
                     <h2 class="section-title cat-02">Recursos base</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 cat-02 mb-12">
-                        <div class="card-asset">
+                        <div class="card-asset cat-02">
                             <div class="thumb-container ratio-square">
-                                <span class="tag-format">Ai</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)" style="text-transform: none;">.ai</span>
                                 <img src="img/recurso_logo.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -485,9 +479,9 @@
                                 <a href="https://drive.google.com/open?id=1yS0Mhy2prwy5ghEVuJXrHKeKLucFKVvj" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-02">
                             <div class="thumb-container ratio-square">
-                                <span class="tag-format">Link</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Link</span>
                                 <img src="img/recurso_font.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -496,9 +490,9 @@
                                 <a href="https://fonts.google.com/specimen/Montserrat" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-02">
                             <div class="thumb-container ratio-square">
-                                <span class="tag-format">Link</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Link</span>
                                 <img src="img/recurso_icons.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -507,25 +501,26 @@
                                 <a href="https://fonts.google.com/icons" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-02">
                             <div class="thumb-container ratio-square">
-                                <span class="tag-format">Web</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Web</span>
                                 <img src="img/recurso_palette.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">02 Recursos base</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Paleta oficial</h3>
-                                <a href="https://uniacc-cgm.github.io/CGM/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                                <a href="#" onclick="showIndependent('color', document.querySelector('[onclick*=\\\'color\\\']')); return false;" class="btn-action mt-auto"><i class="fas fa-palette"></i> Ver sistema</a>
                             </div>
                         </div>
                     </div>
 
+                    <!-- SECCIÓN 03: PLANTILLAS -->
                     <h2 class="section-title cat-03">Plantillas</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-03 mb-12">
-                        <div class="card-asset">
+                        <div class="card-asset cat-03">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Archivos</span>
-                                <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Archivos</span>
+                                <img src="img/plantillas.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">03 Plantillas</span>
@@ -535,11 +530,12 @@
                         </div>
                     </div>
 
+                    <!-- SECCIÓN 04: INFOGRAFÍAS -->
                     <h2 class="section-title cat-04">Infografías</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-04 mb-12">
-                        <div class="card-asset">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 cat-04 mb-12 max-w-4xl">
+                        <div class="card-asset cat-04">
                             <div class="thumb-container ratio-infografia">
-                                <span class="tag-format">Ai</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)" style="text-transform: uppercase;">IA</span>
                                 <img src="img/infografia_web.png" class="thumb-img full-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -548,10 +544,10 @@
                                 <a href="https://drive.google.com/drive/u/1/folders/11Zgzr88RYrY2zh7If_Q_HxP8dKzKYnuY" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-04">
                             <div class="thumb-container ratio-infografia">
-                                <span class="tag-format">.Ai</span>
-                                <img src="img/infografia_pdf.png" class="full-img">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)" style="text-transform: none;">.Ai</span>
+                                <img src="img/infografia_pdf.png" class="thumb-img full-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">04 Infografías</span>
@@ -561,6 +557,7 @@
                         </div>
                     </div>
 
+                    <!-- SECCIÓN 06: VIDEO Y ANIMACIÓN -->
                     <h2 class="section-title cat-06">Video y animación</h2>
                     <div class="considerations-box cat-06" style="border-left-color: #2c66ff;">
                         <div class="cons-header" onclick="toggleCons(this)">
@@ -571,15 +568,15 @@
                             <ul class="list-disc list-inside space-y-3">
                                 <li><b>Archivos entregables:</b> No se requiere subir el proyecto editable, solo el material final renderizado en formato MP4, miniatura para YouTube y el archivo de subtítulos exportado desde Premiere Pro.</li>
                                 <li><b>Uso de plantilla gráfica (MOGRT):</b> La plantilla se utilizará exclusivamente para la intro. Solo debe cambiarse el título del video y alternar la música de la intro y cierre entre las 3 opciones disponibles.</li>
-                                <li><b>Márgenes de seguridad y accesibilidad:</b> Respeta escrupulosamente los márgenes seguros (Safe Margins). Mantén el tercio inferior despejado de logotipos para garantizar que los subtítulos no tapen contenido relevante.</li>
+                                <li><b>Márgenes de seguridad y accesibilidad:</b> Respeta escrupulosamente los márgenes seguros (Safe Margins). Mantén el tercio inferior despejado de logotipos o información crítica para garantizar que los subtítulos de las plataformas de educación o recuadros de intérprete no tapen contenido relevante.</li>
                                 <li><b>Exportación y compresión:</b> Renderiza las versiones finales de video en formato MP4, garantizando que el peso del archivo final sea ágil para la carga rápida en plataformas sin sacrificar la nitidez de los elementos gráficos.</li>
                             </ul>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-06 mb-12">
-                        <div class="card-asset">
+                        <div class="card-asset cat-06">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">.prproj</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">.prproj</span>
                                 <img src="img/pack_azul.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -588,9 +585,9 @@
                                 <a href="https://drive.google.com/open?id=1yCH-vehrB_eu8yhJev_zk9nAHnWG9qv3&usp=drive_fs" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-06">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">.prproj</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">.prproj</span>
                                 <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -599,9 +596,9 @@
                                 <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-06">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">.prproj</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">.prproj</span>
                                 <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -610,20 +607,20 @@
                                 <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-06">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Gif/mp4</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Gif/mp4</span>
                                 <img src="img/logo_animado.gif" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">06 Video y animación</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Logo animado</h3>
-                                <a href="#" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/drive/u/1/folders/13GSyvdYjHOScwD-8Pq_Xsunqe4azaMGX" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-06">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Google slides</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Google slides</span>
                                 <img src="img/storyboard.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -634,89 +631,173 @@
                         </div>
                     </div>
 
+                    <!-- SECCIÓN 07: PODCAST -->
                     <h2 class="section-title cat-07">Podcast</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-07 mb-12">
-                        <div class="card-asset">
-                            <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Wav</span>
-                                <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
+                        <div class="card-asset cat-07">
+                            <div class="thumb-container ratio-square">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Wav</span>
+                                <img src="img/podcast_intro_cierre.jpg" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">07 Podcast</span>
-                                <h3 class="font-bold mb-5 text-[13px] text-gray-400">Música intro/cierre</h3>
-                                <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Música intro/cierre</h3>
+                                <a href="https://drive.google.com/drive/u/1/folders/1yI35yuhUNqWukc7gPgsmql7BxanbOyMe" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
-                        <div class="card-asset">
-                            <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Psd</span>
-                                <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
+                        <div class="card-asset cat-07">
+                            <div class="thumb-container ratio-square">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Jpg</span>
+                                <img src="img/podcast_miniatura.jpg" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">07 Podcast</span>
-                                <h3 class="font-bold mb-5 text-[13px] text-gray-400">Miniaturas Podcast</h3>
-                                <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Miniaturas Podcast</h3>
+                                <a href="https://drive.google.com/drive/u/1/folders/1JISyI4EibOKqeyZGHWjvrvBSgat67Y9f" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                     </div>
 
-                    <h2 class="section-title cat-08">IA Toolbox</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 cat-08 mb-12">
-                        <div class="card-asset">
+                    <!-- SECCIÓN 08: MULTIMEDIA TOOLBOX -->
+                    <h2 class="section-title cat-08">Multimedia Toolbox</h2>
+                    <div class="considerations-box cat-08" style="border-left-color: #3d3838;">
+                        <div class="cons-header" onclick="toggleCons(this)">
+                            <strong class="text-davda-dark">Multimedia Toolbox • Consideraciones de uso</strong>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="cons-content">
+                            <p>El acceso a herramientas e IA (Envato, Napkin y Eleven Labs) se gestiona a través del Coordinador Gráfico Multimedia.</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 cat-08 mb-12">
+                        <div class="card-asset cat-08">
                             <div class="thumb-container ratio-ia-box">
-                                <span class="tag-format">Ia</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)" style="text-transform: uppercase;">IA</span>
                                 <img src="img/ia_upscayl.png" class="thumb-img full-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
-                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 IA Toolbox</span>
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Upscayl</h3>
                                 <p class="text-[10px] leading-tight text-gray-500 mb-4">Aumenta la resolución mediante IA sin perder calidad.</p>
                                 <a href="https://upscayl.org/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-08">
                             <div class="thumb-container ratio-ia-box">
-                                <span class="tag-format">Ia</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)" style="text-transform: uppercase;">IA</span>
                                 <img src="img/ia_firefly.jpg" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
-                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 IA Toolbox</span>
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Adobe Firefly</h3>
                                 <p class="text-[10px] leading-tight text-gray-500 mb-4">Generación y edición de imágenes mediante prompts de texto.</p>
                                 <a href="https://firefly.adobe.com/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-08">
                             <div class="thumb-container ratio-ia-box">
-                                <span class="tag-format">Ia</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)" style="text-transform: uppercase;">IA</span>
                                 <img src="img/ia_cleanup.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
-                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 IA Toolbox</span>
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Cleanup.pictures</h3>
                                 <p class="text-[10px] leading-tight text-gray-500 mb-4">Elimina objetos o personas de cualquier fotografía rápidamente.</p>
                                 <a href="https://cleanup.pictures/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-08">
                             <div class="thumb-container ratio-ia-box">
-                                <span class="tag-format">Ia</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)" style="text-transform: uppercase;">IA</span>
                                 <img src="img/ia_podcast.png" class="thumb-img contain-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
-                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 IA Toolbox</span>
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Adobe Podcast</h3>
                                 <p class="text-[10px] leading-tight text-gray-500 mb-4">Limpia el ruido de fondo de audios para calidad de estudio.</p>
                                 <a href="https://podcast.adobe.com/a" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
+                        <div class="card-asset cat-08">
+                            <div class="thumb-container ratio-ia-box">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)" style="text-transform: uppercase;">IA</span>
+                                <img src="img/napkin.png" class="thumb-img contain-img">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
+                                <h3 class="font-bold mb-1 text-[13px]">Napkin AI</h3>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Genera gráficos y diagramas a partir de texto de forma inmediata.</p>
+                                <a href="https://www.napkin.ai/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                            </div>
+                        </div>
+                        <div class="card-asset cat-08">
+                            <div class="thumb-container ratio-ia-box">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Programa</span>
+                                <img src="img/audition.png" class="thumb-img contain-img">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
+                                <h3 class="font-bold mb-1 text-[13px]">Adobe Audition</h3>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Software para edición, mezcla y restauración de audio profesional.</p>
+                                <a href="https://www.adobe.com/es/products/audition.html?msockid=143d5b1612b96c0f3fc34dd513386d82" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                            </div>
+                        </div>
+                        <div class="card-asset cat-08">
+                            <div class="thumb-container ratio-ia-box">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Programa</span>
+                                <img src="img/premiere.png" class="thumb-img contain-img">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
+                                <h3 class="font-bold mb-1 text-[13px]">Premiere Pro</h3>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Editor de video líder en la industria para cine, TV y web.</p>
+                                <a href="https://www.adobe.com/es/products/premiere.html?msockid=143d5b1612b96c0f3fc34dd513386d82" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                            </div>
+                        </div>
+                        <div class="card-asset cat-08">
+                            <div class="thumb-container ratio-ia-box">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Plugin</span>
+                                <img src="img/mrhorse.png" class="thumb-img contain-img">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
+                                <h3 class="font-bold mb-1 text-[13px]">Mr. Horse</h3>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Plugin esencial para transiciones y animaciones rápidas en AE y Premiere.</p>
+                                <a href="https://misterhorse.com/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                            </div>
+                        </div>
+                        <div class="card-asset cat-08">
+                            <div class="thumb-container ratio-ia-box">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Web</span>
+                                <img src="img/envato.png" class="thumb-img contain-img">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
+                                <h3 class="font-bold mb-1 text-[13px]">Envato Elements</h3>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Librería gigante de recursos, gráficos, plantillas y música.</p>
+                                <a href="https://app.envato.com/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                            </div>
+                        </div>
+                        <div class="card-asset cat-08">
+                            <div class="thumb-container ratio-ia-box">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)" style="text-transform: uppercase;">IA</span>
+                                <img src="img/elevenlabs.png" class="thumb-img contain-img">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
+                                <h3 class="font-bold mb-1 text-[13px]">ElevenLabs</h3>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Generador de voz con IA y herramientas de texto a voz de alta calidad.</p>
+                                <a href="https://elevenlabs.io/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                            </div>
+                        </div>
                     </div>
 
+                    <!-- SECCIÓN 09: TUTORIALES -->
                     <h2 class="section-title cat-09">Tutoriales</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-09 mb-12">
-                        <div class="card-asset">
+                        <div class="card-asset cat-09">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Yt</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Yt</span>
                                 <img src="img/tutoriales.png" class="thumb-img cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -727,11 +808,12 @@
                         </div>
                     </div>
 
+                    <!-- SECCIÓN 10: CASOS DE ÉXITO -->
                     <h2 class="section-title cat-10">Casos de éxito</h2>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 cat-10 mb-12">
-                        <div class="card-asset">
+                        <div class="card-asset cat-10">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Web</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Web</span>
                                 <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -740,9 +822,9 @@
                                 <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
                             </div>
                         </div>
-                        <div class="card-asset">
+                        <div class="card-asset cat-10">
                             <div class="thumb-container ratio-16-9">
-                                <span class="tag-format">Web</span>
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Web</span>
                                 <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
                             </div>
                             <div class="p-5 flex flex-col flex-1">
@@ -751,18 +833,30 @@
                                 <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
                             </div>
                         </div>
+                        <div class="card-asset cat-10">
+                            <div class="thumb-container ratio-16-9">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Web</span>
+                                <img src="img/no.png" class="thumb-img opacity-30 grayscale cover-img">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">10 Casos de éxito</span>
+                                <h3 class="font-bold mb-5 text-[13px] text-gray-400">Ejemplo aplicado 03</h3>
+                                <span class="btn-disabled mt-auto"><i class="fas fa-lock"></i> No disponible</span>
+                            </div>
+                        </div>
                     </div>
 
                 </div>
             </section>
 
+            <!-- PÁGINAS INDEPENDIENTES -->
             <section id="independentPage" class="flex-1 overflow-y-auto p-12 custom-scrollbar bg-davda-bg">
                 <div id="independentContent" class="color-page-container"></div>
             </section>
 
             <footer class="bg-white border-t border-gray-200 p-3 text-center">
                 <p class="text-[11px] text-gray-500 footer-text">
-                    Dudas o sugerencias: contactar al Coordinador de Gráfica Multimedia, <a href="mailto:felipe.hernandez@uniacc.cl" class="text-davda-primary font-bold hover:underline">felipe.hernandez@uniacc.cl</a> o Microsoft Teams.
+                    Dudas o sugerencias: contactar al Coordinador Gráfico Multimedia, <a href="mailto:felipe.hernandez@uniacc.cl" class="text-davda-primary font-bold hover:underline">felipe.hernandez@uniacc.cl</a> o Microsoft Teams.
                 </p>
             </footer>
         </main>
@@ -773,7 +867,7 @@
     <script>
         const systemColors = {
             blue: { id: "blue", name: "Escala Azul", hexes: ["#e5ecff", "#ccd9ff", "#99b3ff", "#668cff", "#2c66ff", "#0040e6", "#0030b3", "#002080", "#00104d"] },
-            yellow: { id: "yellow", name: "Escala Amarillo", hexes: ["#ffeedd", "#ffddaa", "#ffcc77", "#ffbb44", "#ffa500", "#cc8400", "#996300", "#664200", "#332100"] },
+            yellow: { id: "yellow", name: "Escala Amarillo", hexes: ["#fff5e6", "#ffebcc", "#ffd699", "#ffc266", "#ffa500", "#e69500", "#cc8400", "#996300", "#664200"] },
             magenta: { id: "magenta", name: "Escala Magenta", hexes: ["#ffccff", "#ff99ff", "#ff66ff", "#ff33ff", "#ff01ff", "#cc00cc", "#990099", "#660066", "#330033"] },
             white: { id: "white", name: "Escala Blancos", hexes: ["#ffffff", "#fdfdfd", "#fafafa", "#f8f8f8", "#f5f5f5", "#e0e0e0", "#cccccc", "#b3b3b3", "#999999"] },
             grafito: { id: "grafito", name: "Escala Grafito", hexes: ["#e0dede", "#c1bebe", "#a29d9d", "#837d7d", "#3d3838", "#312d2d", "#252222", "#181616", "#0c0b0b"] },
@@ -782,9 +876,10 @@
         };
 
         const novedadesData = [
-            { fecha: "15 de abril, 2026", titulo: "Actualización de Recursos y Consideraciones", desc: "Se agregaron nuevos packs de video y se actualizaron las consideraciones de uso para PPT y Word.", tipo: "Mejora" },
-            { fecha: "14 de abril, 2026", titulo: "Actualización de Plantillas y Contacto", desc: "Integración de la nueva carpeta de plantillas originales y enlace de contacto directo en footer.", tipo: "Mejora" },
-            { fecha: "09 de abril, 2026", titulo: "Sistema de Color e interactividad", desc: "Integración del panel dinámico para facilitar el uso de la paleta oficial.", tipo: "Mejora" }
+            { fecha: "05 de mayo, 2026", titulo: "Nuevas funcionalidades: MIV y Filtros Dinámicos", desc: "Se agregó el Manual de Identidad Visual interactivo, descarga de paleta .ASE y todas las etiquetas son filtrables al hacerles clic.", tipo: "Mejora" },
+            { fecha: "05 de mayo, 2026", titulo: "Integración de Multimedia Toolbox y Podcast", desc: "Se habilitaron los archivos de la sección Podcast y la nueva categoría Multimedia Toolbox con herramientas de IA, programas y plugins.", tipo: "Mejora" },
+            { fecha: "15 de abril, 2026", titulo: "Actualización de Recursos", desc: "Nuevos packs de video y consideraciones de reemplazo de imagen.", tipo: "Mejora" },
+            { fecha: "14 de abril, 2026", titulo: "Actualización de Plantillas y Contacto", desc: "Integración de la nueva carpeta de plantillas originales y enlace de contacto directo en footer.", tipo: "Mejora" }
         ];
 
         function toggleCons(header) { 
@@ -810,7 +905,7 @@
             const container = document.getElementById('newsContainer');
             if(!container) return;
             container.innerHTML = novedadesData.map(n => `
-                <div class="border-l-2 border-davda-primary pl-4 py-1">
+                <div class="border-l-2 border-davda-primary pl-4 py-1 mb-4">
                     <div class="flex items-center gap-2 mb-1">
                         <span class="text-[9px] font-bold uppercase px-2 py-0.5 rounded bg-davda-primary text-white">${n.tipo}</span>
                         <span class="text-[10px] text-gray-400 font-bold">${n.fecha}</span>
@@ -832,6 +927,9 @@
                 document.getElementById('btnAll').classList.add('active-filter');
             }
 
+            // Restaurar visualización de todas las tarjetas para limpiar el filtro por tags
+            document.querySelectorAll('.card-asset').forEach(card => card.style.display = 'flex');
+
             const elementsToFilter = document.querySelectorAll(".section-title, .considerations-box, .grid");
 
             if (c === "all" || c === "") {
@@ -847,6 +945,48 @@
             }
         }
 
+        function filterByTag(tagText, event) {
+            if(event) event.stopPropagation();
+            document.getElementById('repositoryGrid').style.display = 'block';
+            document.getElementById('independentPage').style.display = 'none';
+            document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active-filter'));
+            
+            const searchTag = tagText.trim().toLowerCase();
+            
+            // Hacer visibles todas las secciones temporalmente para buscar
+            document.querySelectorAll(".section-title, .considerations-box, .grid").forEach(el => el.classList.remove("hidden-resource"));
+            
+            document.querySelectorAll('.grid').forEach(grid => {
+                let gridHasVisibleCards = false;
+                grid.querySelectorAll('.card-asset').forEach(card => {
+                    const tagEl = card.querySelector('.tag-format');
+                    if (tagEl && tagEl.innerText.trim().toLowerCase() === searchTag) {
+                        card.style.display = 'flex';
+                        gridHasVisibleCards = true;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                // Ocultar grilla completa y sus títulos si ninguna tarjeta tiene el tag buscado
+                if (!gridHasVisibleCards) {
+                    grid.classList.add('hidden-resource');
+                    const catClass = Array.from(grid.classList).find(c => c.startsWith('cat-'));
+                    if (catClass) {
+                        document.querySelectorAll(`.section-title.${catClass}, .considerations-box.${catClass}`).forEach(el => el.classList.add('hidden-resource'));
+                    }
+                } else {
+                    grid.classList.remove('hidden-resource');
+                    const catClass = Array.from(grid.classList).find(c => c.startsWith('cat-'));
+                    if (catClass) {
+                        document.querySelectorAll(`.section-title.${catClass}, .considerations-box.${catClass}`).forEach(el => el.classList.remove('hidden-resource'));
+                    }
+                }
+            });
+            
+            showToast(`Filtrando por etiqueta: ${tagText.toUpperCase()}`);
+        }
+
         function showIndependent(type, btn) {
             document.getElementById('repositoryGrid').style.display = 'none';
             document.getElementById('independentPage').style.display = 'block';
@@ -858,13 +998,18 @@
 
             if(type === 'color') {
                 content.innerHTML = `
-                    <div class="mb-10">
-                        <h1 class="text-3xl font-black mb-2 text-davda-dark">Sistema de Color</h1>
-                        <p class="opacity-70">Haz clic en cualquier muestra para copiar su valor HEX al portapapeles.</p>
+                    <div class="mb-10 flex justify-between items-end">
+                        <div>
+                            <h1 class="text-3xl font-black mb-2 text-davda-dark">Sistema de Color</h1>
+                            <p class="opacity-70">Haz clic en cualquier muestra para copiar su valor HEX al portapapeles.</p>
+                        </div>
+                        <a href="#" onclick="showToast('Descargando paleta (.ase)...'); return false;" class="bg-davda-primary text-white px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-davda-dark transition-colors flex items-center gap-2 shadow-sm">
+                            <i class="fas fa-download"></i> Descargar .ase
+                        </a>
                     </div>
                     <div class="main-brand-colors">
                         <div class="main-color-card" onclick="copyToClipboard('#2c66ff')"><div class="main-color-box" style="background:#2c66ff"></div><span class="font-bold text-xs mt-2 uppercase">Azul</span></div>
-                        <div class="main-color-card" onclick="copyToClipboard('#eab308')"><div class="main-color-box" style="background:#eab308"></div><span class="font-bold text-xs mt-2 uppercase">Amarillo</span></div>
+                        <div class="main-color-card" onclick="copyToClipboard('#ffa500')"><div class="main-color-box" style="background:#ffa500"></div><span class="font-bold text-xs mt-2 uppercase">Amarillo</span></div>
                         <div class="main-color-card" onclick="copyToClipboard('#ff01ff')"><div class="main-color-box" style="background:#ff01ff"></div><span class="font-bold text-xs mt-2 uppercase">Magenta</span></div>
                         <div class="main-color-card" onclick="copyToClipboard('#3d3838')"><div class="main-color-box" style="background:#3d3838"></div><span class="font-bold text-xs mt-2 uppercase">Grafito</span></div>
                         <div class="main-color-card" onclick="copyToClipboard('#f5f5f5')"><div class="main-color-box" style="background:#f5f5f5"></div><span class="font-bold text-xs mt-2 uppercase">B. Humo</span></div>
@@ -905,6 +1050,21 @@
                 render('grafito', 'c2'); 
                 render('green', 'c3'); 
                 render('red', 'c3');
+            } else if(type === 'manual') {
+                content.innerHTML = `
+                    <div class="mb-8 flex justify-between items-end">
+                        <div>
+                            <h1 class="text-3xl font-black mb-2 text-davda-dark">Manual de Identidad Visual</h1>
+                            <p class="opacity-70">Documento maestro institucional interactivo.</p>
+                        </div>
+                        <a href="https://docs.google.com/presentation/d/1D1JK5KeMnJUpe2MeLfz3efNd1OQmR_V9I0zemTpziWw/edit?usp=sharing" target="_blank" class="bg-white text-davda-primary px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-gray-50 transition-colors flex items-center gap-2 border border-gray-200 shadow-sm">
+                            <i class="fas fa-external-link-alt"></i> Abrir en Slides
+                        </a>
+                    </div>
+                    <div class="w-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="aspect-ratio: 16/9;">
+                        <iframe src="https://docs.google.com/presentation/d/1D1JK5KeMnJUpe2MeLfz3efNd1OQmR_V9I0zemTpziWw/embed?start=false&loop=false&delayms=3000" frameborder="0" width="100%" height="100%" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+                    </div>
+                `;
             } else if(type === 'checklist') {
                 const data = [
                     { t: "1. PPT (PowerPoint) • Checklist de calidad", i: ["Origen del archivo: ¿Se creó una copia a partir del archivo maestro sin alterar el original?", "Animaciones: ¿Todas las entradas son de izquierda a derecha con efecto desvanecer?", "Configuración de página: ¿Se mantiene la relación de aspecto 16:9?", "Jerarquía: ¿Se respetan los niveles de texto definidos en la plantilla?", "Peso: ¿Se comprimieron las imágenes para evitar un archivo excesivamente pesado?"] },
@@ -918,14 +1078,20 @@
             }
         }
 
+        function showToast(msg) {
+            const toast = document.getElementById('toastMsg'); 
+            toast.innerText = msg; 
+            toast.classList.add('show'); 
+            setTimeout(() => toast.classList.remove('show'), 2500); 
+        }
+
         function copyToClipboard(t) { 
             navigator.clipboard.writeText(t).then(() => { 
-                const toast = document.getElementById('toastMsg'); 
-                toast.innerText = `Copiado: ${t.toUpperCase()}`; 
-                toast.classList.add('show'); 
-                setTimeout(() => toast.classList.remove('show'), 2000); 
+                showToast(`Copiado: ${t.toUpperCase()}`);
             }); 
         }
+        
+        window.onload = renderNews;
     </script>
 </body>
 </html>
