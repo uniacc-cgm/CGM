@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DAVDA / Recursos Gráficos Multimedia</title>
+    <title>DAVDA / Repositorio de Recursos Gráficos Multimedia</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800;900&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -132,7 +132,7 @@
                         <span class="text-xl">✅</span>
                         <div>
                             <h3 class="font-bold text-sm">Aplica el QA</h3>
-                            <p class="text-[11px] text-gray-500">Todo material debe cumplir con sus respectivas <b>Consideraciones de Uso</b> y checklists de calidad antes de exportarse.</p>
+                            <p class="text-[11px] text-gray-500">Todo material debe cumplir con sus respectivas <b>Consideraciones de uso</b> y checklists de calidad antes de exportarse.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
@@ -168,7 +168,7 @@
                     <img src="img/uniacc_logo.png" alt="UNIACC Logo" class="max-h-12 w-auto object-contain">
                 </a>
                 <h1 class="text-sm font-extrabold leading-tight tracking-tight uppercase">
-                    DAVDA <br><span class="text-davda-amarillo font-medium capitalize">Recursos Gráficos Multimedia</span>
+                    DAVDA <br><span class="text-davda-amarillo font-medium normal-case">Repositorio de Recursos Gráficos Multimedia</span>
                 </h1>
             </div>
             
@@ -187,14 +187,15 @@
                 <button onclick="filterSelection('tutoriales', this)" class="nav-link">09 Tutoriales</button>
                 <button onclick="filterSelection('casos-exito', this)" class="nav-link">10 Casos de éxito</button>
                 <div class="h-px bg-white/5 my-4"></div>
-                <button onclick="showIndependent('manual', this)" class="nav-link"><i class="fas fa-book mr-3"></i> Manual de identidad visual</button>
-                <button onclick="showIndependent('color', this)" class="nav-link"><i class="fas fa-palette mr-3"></i> Sistema de color</button>
-                <button onclick="showIndependent('checklist', this)" class="nav-link opacity-60"><i class="fas fa-lock mr-3"></i> Check list de calidad (No disponible)</button>
+                <button onclick="showIndependent('manual', this)" class="nav-link"><i class="fas fa-book mr-3"></i> Manual de Identidad Visual</button>
+                <button onclick="showIndependent('color', this)" class="nav-link"><i class="fas fa-palette mr-3"></i> Sistema de Color</button>
+                <button onclick="window.location.href='maqueta.html'" class="nav-link"><i class="fas fa-border-all mr-3"></i> Diseñador de retículas</button>
+                <button onclick="showIndependent('checklist', this)" class="nav-link opacity-60"><i class="fas fa-lock mr-3"></i> Check list de Calidad</button>
             </nav>
 
             <div class="p-6 border-t border-white/5">
                 <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold text-center">
-                    Última edición: <span style="color: #F5F5F5;">29 de mayo</span>, 2026
+                    ÚLTIMA EDICIÓN: <span style="color: #F5F5F5;">04 DE JUNIO</span>, 2026
                 </p>
             </div>
         </aside>
@@ -205,8 +206,7 @@
                     <button onclick="toggleMobileMenu()" class="lg:hidden text-davda-dark text-xl p-2 hover:bg-gray-100 rounded-md transition-colors">
                         <i class="fas fa-bars"></i>
                     </button>
-                    <div class="flex-1" id="headerCategoryActions">
-                        </div>
+                    <div class="flex-1" id="headerCategoryActions"></div>
                 </div>
                 
                 <div class="flex items-center gap-4">
@@ -214,7 +214,7 @@
                         <i class="fas fa-info-circle text-lg"></i> Reglas
                     </button>
                     <div class="hidden sm:flex gap-2 p-2 bg-gray-50 border rounded-lg items-center text-[10px] font-semibold text-davda-grafito">
-                        <span class="text-gray-400 uppercase mr-1">Paleta HEX:</span>
+                        <span class="text-gray-400 uppercase mr-1">Paleta hex:</span>
                         <button onclick="copyToClipboard('#2c66ff')" class="w-5 h-5 bg-[#2c66ff] rounded shadow-sm hover:scale-110 transition-transform"></button>
                         <button onclick="copyToClipboard('#ffa500')" class="w-5 h-5 bg-[#ffa500] rounded shadow-sm hover:scale-110 transition-transform"></button>
                         <button onclick="copyToClipboard('#ff01ff')" class="w-5 h-5 bg-[#ff01ff] rounded shadow-sm hover:scale-110 transition-transform"></button>
@@ -234,7 +234,7 @@
                     <div class="flex items-center gap-4">
                         <i class="fas fa-lock text-xl"></i>
                         <div>
-                            <p class="font-bold text-sm">Reglas de Oro del Repositorio</p>
+                            <p class="font-bold text-sm">Reglas de oro del repositorio</p>
                             <p class="text-[11px] opacity-90">Protocolos obligatorios para la gestión de másters y calidad multimedia.</p>
                         </div>
                     </div>
@@ -544,7 +544,7 @@
                     <h2 class="section-title infografias">Infografías</h2>
                     <div class="considerations-box infografias" style="border-left-color: #2c66ff;">
                         <div class="cons-header" onclick="toggleCons(this)">
-                            <strong class="text-davda-primary">Los 4 pilares para una infografía exitosa</strong>
+                            <strong class="text-davda-primary">Los 4 pilares para una infografía de éxito</strong>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="cons-content">
@@ -588,7 +588,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 infografias mb-12 max-w-4xl">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 infografias mb-12">
                         <div class="card-asset infografias">
                             <div class="thumb-container ratio-infografia">
                                 <span class="tag-format" onclick="filterByTag(this.innerText, event)" style="text-transform: uppercase;">IA</span>
@@ -609,6 +609,17 @@
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">04 Infografías</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Infografía PDF</h3>
                                 <a href="https://drive.google.com/open?id=1nT_Be1SnCZtWD3GzH_ofaclLaNcNHtrn&usp=drive_fs" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
+                            </div>
+                        </div>
+                        <div class="card-asset infografias">
+                            <div class="thumb-container ratio-infografia">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Web</span>
+                                <img src="img/disenador_retículas.jpg" class="thumb-img full-img">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">04 Infografías</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Diseñador de retículas</h3>
+                                <a href="maqueta.html" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver diseñador de retículas</a>
                             </div>
                         </div>
                     </div>
@@ -637,7 +648,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">06 Videos</span>
                                 <h3 class="font-bold mb-5 text-[13px]">Miniatura Youtube</h3>
-                                <a href="#" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
+                                <a href="https://drive.google.com/drive/u/2/folders/1lQ3J9OUinu7rG17_4cgFIk5WxQy8RTeo" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
                         <div class="card-asset video-animacion">
@@ -977,11 +988,13 @@
         };
 
         const novedadesData = [
+            { fecha: "04 de junio, 2026", titulo: "Actualización del Manual de Identidad Visual", desc: "Se reestructuró la sección con una nueva grilla de tarjetas que da acceso directo a los 5 volúmenes de lineamientos y presentaciones base.", tipo: "Mejora" },
+            { fecha: "04 de junio, 2026", titulo: "Lanzamiento del diseñador de retículas infográficas", desc: "Se integró una nueva herramienta avanzada para la creación y exportación de estructuras base y grillas constructivas en formato SVG.", tipo: "Mejora" },
+            { fecha: "04 de junio, 2026", titulo: "Desactivación temporal del check list de calidad", desc: "La sección de listas de verificación se encuentra temporalmente fuera de servicio por un proceso de revisión y optimización institucional.", tipo: "Aviso" },
             { fecha: "29 de mayo, 2026", titulo: "Actualización de Videos y Bancos de Stock", desc: "Se agregó la tarjeta de Miniatura para YouTube (.Ai) en la sección Videos y los bancos gratuitos Pexels, Pixabay y Coverr.", tipo: "Mejora" },
             { fecha: "14 de mayo, 2026", titulo: "Nuevas funcionalidades: Deep Linking y Mobile UX", desc: "Se agregó el menú hamburguesa responsivo y soporte para enlaces directos (#seccion) para facilitar la colaboración.", tipo: "Mejora" },
             { fecha: "05 de mayo, 2026", titulo: "Integración de Multimedia Toolbox y Podcast", desc: "Se habilitaron los archivos de la sección Podcast y la nueva categoría Multimedia Toolbox con herramientas de IA, programas y plugins.", tipo: "Mejora" },
-            { fecha: "15 de abril, 2026", titulo: "Actualización de Recursos", desc: "Nuevos packs de video y consideraciones de reemplazo de imagen.", tipo: "Mejora" },
-            { fecha: "14 de abril, 2026", titulo: "Actualización de Plantillas y Contacto", desc: "Integración de la nueva carpeta de plantillas originales y enlace de contacto directo en footer.", tipo: "Mejora" }
+            { fecha: "15 de abril, 2026", titulo: "Actualización de Recursos", desc: "Nuevos packs de video y consideraciones de reemplazo de imagen.", tipo: "Mejora" }
         ];
 
         function toggleCons(header) { header.parentElement.classList.toggle('active'); }
@@ -1037,7 +1050,7 @@
             const container = document.getElementById('headerCategoryActions');
             container.innerHTML = `
                 <button onclick="copySectionLink('${hash}')" class="bg-davda-primary text-white px-4 py-2 rounded-lg font-bold text-[10px] uppercase tracking-widest hover:bg-davda-dark transition-colors flex items-center gap-2 shadow-sm">
-                    <i class="fas fa-link"></i> Copiar enlace directo
+                    <i class="fas fa-link"></i> Compartir
                 </button>
             `;
         }
@@ -1090,7 +1103,7 @@
                             <p class="opacity-70">Haz clic en cualquier muestra para copiar su valor HEX al portapapeles.</p>
                         </div>
                         <button onclick="copySectionLink('color')" class="bg-davda-primary text-white px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-davda-dark transition-colors flex items-center gap-2 shadow-sm">
-                            <i class="fas fa-link"></i> Copiar enlace directo
+                            <i class="fas fa-link"></i> Compartir
                         </button>
                     </div>
 
@@ -1151,13 +1164,82 @@
                 render('blue', 'c1'); render('yellow', 'c1'); render('magenta', 'c1'); render('white', 'c2'); render('grafito', 'c2'); render('green', 'c3'); render('red', 'c3');
             } else if(type === 'manual') {
                 content.innerHTML = `
-                    <div class="mb-8 flex justify-between items-end">
-                        <div><h1 class="text-3xl font-black mb-2 text-davda-dark">Manual de Identidad Visual</h1><p class="opacity-70">Documento maestro institucional interactivo.</p></div>
-                        <button onclick="copySectionLink('manual')" class="bg-davda-primary text-white px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-davda-dark transition-colors flex items-center gap-2 shadow-sm">
-                            <i class="fas fa-link"></i> Copiar enlace directo
+                    <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                        <div>
+                            <h1 class="text-3xl font-black mb-2 text-davda-dark">Manual de Identidad Visual</h1>
+                            <p class="opacity-70">Documentos maestros institucionales para la construcción gráfica.</p>
+                        </div>
+                        <button onclick="copySectionLink('manual')" class="bg-davda-primary text-white px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-davda-dark transition-colors flex items-center gap-2 shadow-sm shrink-0">
+                            <i class="fas fa-link"></i> Compartir
                         </button>
                     </div>
-                    <div class="w-full bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden" style="aspect-ratio: 16/9;"><iframe src="https://docs.google.com/presentation/d/1D1JK5KeMnJUpe2MeLfz3efNd1OQmR_V9I0zemTpziWw/embed?start=false&loop=false&delayms=3000" frameborder="0" width="100%" height="100%" allowfullscreen="true"></iframe></div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+                        <!-- Tarjeta 1 -->
+                        <div class="card-asset">
+                            <div class="thumb-container ratio-16-9">
+                                <span class="tag-format" onclick="filterByTag('Slides', event)">Slides</span>
+                                <img src="img/p_00.png" class="thumb-img cover-img" onerror="this.src='img/no.png'">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Volumen 00</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Manual de identidad visual y recursos de aprendizaje</h3>
+                                <a href="https://docs.google.com/presentation/d/1D1JK5KeMnJUpe2MeLfz3efNd1OQmR_V9I0zemTpziWw/edit?usp=drive_link" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver presentación</a>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 2 -->
+                        <div class="card-asset">
+                            <div class="thumb-container ratio-16-9">
+                                <span class="tag-format" onclick="filterByTag('Slides', event)">Slides</span>
+                                <img src="img/p_01.png" class="thumb-img cover-img" onerror="this.src='img/no.png'">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Volumen 01</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Presentación de bases gráficas</h3>
+                                <a href="https://docs.google.com/presentation/d/1O8mI2M2yixViX8J3qmxI1AfZY7yZQfEBxmBUrM_2UqI/edit?usp=drive_link" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver presentación</a>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 3 -->
+                        <div class="card-asset">
+                            <div class="thumb-container ratio-16-9">
+                                <span class="tag-format" onclick="filterByTag('Slides', event)">Slides</span>
+                                <img src="img/p_02.png" class="thumb-img cover-img" onerror="this.src='img/no.png'">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Volumen 02</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Presentación de Genially + podcast</h3>
+                                <a href="https://docs.google.com/presentation/d/1Bsxlp5RmqIxgoNwYWJ-bIJFNm_vwCW6krgtm73iznZg/edit?usp=drive_link" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver presentación</a>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 4 -->
+                        <div class="card-asset">
+                            <div class="thumb-container ratio-16-9">
+                                <span class="tag-format" onclick="filterByTag('Slides', event)">Slides</span>
+                                <img src="img/p_03.png" class="thumb-img cover-img" onerror="this.src='img/no.png'">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Volumen 03</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Presentación de storyboard + ecosistema de vídeos</h3>
+                                <a href="https://docs.google.com/presentation/d/17ZRjuCq91D71uNdotTS6Eirje02i2Vue7A3m3xfacE4/edit?usp=drive_link" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver presentación</a>
+                            </div>
+                        </div>
+
+                        <!-- Tarjeta 5 -->
+                        <div class="card-asset">
+                            <div class="thumb-container ratio-16-9">
+                                <span class="tag-format" onclick="filterByTag('Slides', event)">Slides</span>
+                                <img src="img/p_04.png" class="thumb-img cover-img" onerror="this.src='img/no.png'">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">Volumen 04</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Diseño de infografías</h3>
+                                <a href="https://docs.google.com/presentation/d/1BA5Sesgqg1MNwAU2SpqKF-yfIbvF6mVhzLIWiyTNqdc/edit?usp=drive_link" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver presentación</a>
+                            </div>
+                        </div>
+                    </div>
                 `;
             } else if(type === 'checklist') {
                 content.innerHTML = `
@@ -1179,7 +1261,7 @@
         }
 
         function showToast(msg) { const toast = document.getElementById('toastMsg'); toast.innerText = msg; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 2500); }
-        function copyToClipboard(t) { navigator.clipboard.writeText(t).then(() => { showToast(`Copiado: ${t.toUpperCase()}`); }); }
+        function copyToClipboard(t) { navigator.clipboard.writeText(t).then(() => { showToast(`Copiado al portapapeles`); }); }
         
         window.onload = () => { renderNews(); handleHash(); };
         window.onhashchange = handleHash;

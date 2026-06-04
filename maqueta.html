@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CGM Hub / Diseñador de retículas infográficas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Montserrat', 'sans-serif'] },
+                    colors: { 
+                        davda: { primary: '#2c66ff', bg: '#f5f5f5', dark: '#3d3838', grafito: '#3d3838', amarillo: '#ffa500', magenta: '#ff01ff', success: '#00a859', error: '#e62525' } 
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* ESTILOS BASE DAVDA */
+        body { font-family: 'Montserrat', sans-serif; background-color: #f5f5f5; color: #3d3838; font-size: 13px; margin: 0; }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #2c66ff; border-radius: 10px; }
+        
+        .section-title { font-size: 18px; font-weight: 800; color: #3d3838; border-bottom: 2px solid #2c66ff33; padding-bottom: 8px; margin-top: 32px; margin-bottom: 24px; grid-column: 1 / -1; }
+        .nav-link { width: 100%; text-align: left; padding: 8px 12px; border-radius: 6px; font-weight: 600; transition: all 0.2s; color: rgba(255,255,255,0.7); font-size: 13px; border: none; background: transparent; cursor: pointer; }
+        .nav-link:hover { background-color: rgba(255,255,255,0.05); color: white; }
+        .nav-link.active-filter { background-color: #2c66ff !important; color: white !important; }
+
+        .btn-action { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; text-align: center; background-color: #2c66ff; color: white; padding: 12px; border-radius: 6px; font-weight: 800; transition: background 0.2s; font-size: 12px; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(44, 102, 255, 0.2); }
+        .btn-action:hover { background-color: #3d3838; transform: translateY(-1px); }
+
+        .considerations-box { background-color: #ffffff; border-left: 4px solid #2c66ff; margin-bottom: 32px; grid-column: 1 / -1; border-radius: 0 8px 8px 0; box-shadow: 0 2px 4px rgba(0,0,0,0.05); overflow: hidden; }
+        .cons-header { padding: 16px; cursor: default; display: flex; justify-content: space-between; align-items: center; }
+        .cons-content { padding: 0 16px 16px 16px; display: block; font-size: 12px; color: #3d3838; line-height: 1.6; }
+        .cons-header strong { font-size: 13px; text-transform: none; }
+
+        .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #3d3838; color: #f5f5f5; padding: 12px 24px; border-radius: 30px; transition: transform 0.3s ease; z-index: 2000; font-weight: bold; }
+        .toast.show { transform: translateX(-50%) translateY(0); }
+
+        /* ESTILOS COMPONENTES MAQUETADOR INTEGADOS */
+        .config-card { background-color: #ffffff; border-radius: 8px; padding: 24px; box-shadow: 0 4px 6px rgba(0,0,0,0.02); border: 1px solid #e5e7eb; height: fit-content; }
+        .form-group { margin-bottom: 16px; }
+        .form-label { display: block; font-weight: 700; margin-bottom: 8px; font-size: 12px; color: #3d3838; }
+        .form-select, .form-range { width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 12px; background-color: #f8fafc; color: #3d3838; transition: border-color 0.2s, box-shadow 0.2s; outline: none; }
+        .form-select:focus { border-color: #2c66ff; box-shadow: 0 0 0 3px rgba(44, 102, 255, 0.1); background-color: #ffffff; }
+        
+        .switch-label { display: flex; align-items: center; cursor: pointer; gap: 10px; font-weight: 700; font-size: 12px; color: #3d3838; }
+        .switch-input { display: none; }
+        .switch-button { width: 40px; height: 20px; background-color: #d1d5db; border-radius: 20px; position: relative; transition: background-color 0.2s; }
+        .switch-button::after { content: ''; width: 16px; height: 16px; background-color: white; border-radius: 50%; position: absolute; top: 2px; left: 2px; transition: left 0.2s; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+        .switch-input:checked + .switch-button { background-color: #2c66ff; }
+        .switch-input:checked + .switch-button::after { left: 22px; }
+
+        /* PREVISUALIZADOR DEL LIENZO ESTILIZADO DAVDA */
+        .preview-area { background-color: #f8fafc; border-radius: 8px; padding: 32px; display: flex; justify-content: center; align-items: center; min-height: 600px; border: 1px dashed #cbd5e1; }
+        .workspace-canvas { background-color: #ffffff; box-shadow: 0 12px 30px rgba(0,0,0,0.1); transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); position: relative; display: flex; flex-direction: column; border: 1px solid #d1d5db; }
+        .workspace-canvas.horizontal { width: 100%; max-width: 820px; aspect-ratio: 16 / 9; }
+        .workspace-canvas.vertical { height: 550px; aspect-ratio: 1 / 1.414; }
+        .workspace-canvas.tabloide { height: 570px; aspect-ratio: 11 / 17; }
+
+        .canvas-header { height: 12%; background-color: #FFFFFF; border-bottom: 1px solid #f3f4f6; display: flex; align-items: center; padding: 0 24px; gap: 16px; }
+        .logo-placeholder { width: 120px; height: 65%; background-color: #f8fafc; border: 1px dashed #9ca3af; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 800; color: #2c66ff; }
+        .header-title { font-size: 12px; font-weight: 800; color: #2c66ff; }
+
+        .canvas-footer { height: 14%; background-color: #2c66ff; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 0 32px; font-size: 9px; color: white; border-top: 1px solid rgba(255,255,255,0.1); }
+        
+        .canvas-body { flex: 1; position: relative; padding: 32px; }
+        .canvas-safe-area { position: absolute; top: 32px; left: 32px; right: 32px; bottom: 32px; border: 1px dashed rgba(44, 102, 255, 0.15); pointer-events: none; z-index: 10; }
+        .grid-overlay-container { width: 100%; height: 100%; position: relative; }
+
+        /* BLOQUES WIREFRAME HEREDANDO COLORES UNIACC */
+        .wf-block { border: 1px dashed rgba(44, 102, 255, 0.25); border-radius: 4px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 6px; font-size: 10px; font-weight: 700; text-align: center; box-sizing: border-box; position: relative; }
+        .technical-coord { position: absolute; top: 2px; left: 4px; font-size: 8px; color: #9ca3af; font-weight: 800; background-color: rgba(255,255,255,0.9); padding: 2px 4px; border-radius: 2px; display: none; border: 1px solid #e5e7eb; }
+        
+        .wf-foco-principal { background-color: rgba(44, 102, 255, 0.05); border: 1px solid #2c66ff; color: #2c66ff; }
+        .wf-foco-secundario { background-color: rgba(255, 165, 0, 0.05); border: 1px dashed #ffa500; color: #d98d00; }
+        .wf-foco-terciario { background-color: rgba(255, 1, 255, 0.05); border: 1px dashed #ff01ff; color: #cc00cc; }
+
+        /* TABLAS Y ESPECIFICACIONES */
+        .miv-table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; margin-bottom: 24px; background: white; border-radius: 8px; overflow: hidden; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        .miv-table th { background-color: #2c66ff; color: white; padding: 14px; font-weight: 800; border: 1px solid #2c66ff; }
+        .miv-table td { padding: 14px; border: 1px solid #e5e7eb; vertical-align: top; }
+        .miv-table tr:nth-child(even) td { background-color: #f8fafc; }
+        .miv-td-small { display: block; font-size: 10px; color: #6b7280; margin-top: 4px; font-weight: 600; }
+
+        .export-card { border: 1px solid #e5e7eb; border-radius: 8px; padding: 20px; background: #ffffff; box-shadow: 0 2px 4px rgba(0,0,0,0.02); transition: transform 0.2s; height: 100%; }
+        .export-card:hover { border-color: #2c66ff; transform: translateY(-2px); }
+        .export-card h3 { color: #2c66ff; font-size: 14px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; font-weight: 800; }
+        .export-card ul { list-style: none; margin: 0; padding: 0; }
+        .export-card li { font-size: 12px; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid #f3f4f6; color: #6b7280; }
+        .export-card li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .export-card strong { color: #3d3838; font-weight: 700; }
+
+        /* Sidebar Responsive Fix */
+        @media (max-width: 1024px) {
+            #mainSidebar { position: fixed; left: -100%; top: 0; bottom: 0; width: 280px; z-index: 1000; transition: left 0.3s ease; }
+            #mainSidebar.active { left: 0; }
+            .sidebar-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(2px); z-index: 999; display: none; }
+            .sidebar-overlay.active { display: block; }
+        }
+    </style>
+</head>
+<body class="flex flex-col h-screen overflow-hidden">
+
+    <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
+
+    <div class="flex flex-1 overflow-hidden">
+        <!-- BARRA LATERAL DAVDA -->
+        <aside id="mainSidebar" class="w-72 bg-davda-dark text-white flex flex-col z-20 shadow-2xl shrink-0">
+            <div class="p-8 border-b border-white/5 flex flex-col items-center text-center">
+                <a href="javascript:void(0)" onclick="window.location.href='index.html'" class="w-full mb-4 flex items-center justify-center hover:opacity-80 transition-opacity">
+                    <img src="img/uniacc_logo.png" alt="Logo UNIACC" class="max-h-12 w-auto object-contain">
+                </a>
+                <h1 class="text-sm font-extrabold leading-tight tracking-tight uppercase">
+                    DAVDA <br><span class="text-davda-amarillo font-medium normal-case">Repositorio de Recursos Gráficos Multimedia</span>
+                </h1>
+            </div>
+            
+            <nav class="flex-1 overflow-y-auto p-4 space-y-1 custom-scrollbar">
+                <button onclick="window.location.href='index.html'" class="nav-link" id="btnAll">
+                    <i class="fas fa-layer-group mr-3"></i> Todo el repositorio
+                </button>
+                <div class="h-px bg-white/5 my-4"></div>
+                <button onclick="window.location.href='index.html#academicos'" class="nav-link">01 Académicos</button>
+                <button onclick="window.location.href='index.html#recursos-base'" class="nav-link">02 Recursos base</button>
+                <button onclick="window.location.href='index.html#plantillas'" class="nav-link">03 Plantillas</button>
+                <button onclick="window.location.href='index.html#infografias'" class="nav-link">04 Infografías</button>
+                <button onclick="window.location.href='index.html#video-animacion'" class="nav-link">06 Videos</button>
+                <button onclick="window.location.href='index.html#podcast'" class="nav-link">07 Podcast</button>
+                <button onclick="window.location.href='index.html#toolbox'" class="nav-link">08 Multimedia Toolbox</button>
+                <button onclick="window.location.href='index.html#tutoriales'" class="nav-link">09 Tutoriales</button>
+                <button onclick="window.location.href='index.html#casos-exito'" class="nav-link">10 Casos de éxito</button>
+                <div class="h-px bg-white/5 my-4"></div>
+                <button onclick="window.location.href='index.html#manual'" class="nav-link"><i class="fas fa-book mr-3"></i> Manual de Identidad Visual</button>
+                <button onclick="window.location.href='index.html#color'" class="nav-link"><i class="fas fa-palette mr-3"></i> Sistema de Color</button>
+                <button class="nav-link active-filter"><i class="fas fa-border-all mr-3"></i> Diseñador de retículas</button>
+                <button onclick="window.location.href='index.html#checklist'" class="nav-link opacity-60"><i class="fas fa-lock mr-3"></i> Check list de Calidad</button>
+            </nav>
+
+            <div class="p-6 border-t border-white/5">
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold text-center">
+                    ÚLTIMA EDICIÓN: <span style="color: #F5F5F5;">04 DE JUNIO</span>, 2026
+                </p>
+            </div>
+        </aside>
+
+        <main class="flex-1 flex flex-col bg-davda-bg">
+            <!-- HEADER DAVDA (Simplificado) -->
+            <header class="h-24 flex items-center justify-between px-6 lg:px-10 bg-white border-b border-gray-200 shadow-sm z-10 shrink-0">
+                <div class="flex items-center gap-4">
+                    <button onclick="toggleMobileMenu()" class="lg:hidden text-davda-dark text-xl p-2 hover:bg-gray-100 rounded-md transition-colors">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:flex gap-2 p-2 bg-gray-50 border rounded-lg items-center text-[10px] font-semibold text-davda-grafito">
+                        <span class="text-gray-400 mr-1">Paleta hex:</span>
+                        <button onclick="copyToClipboard('#2c66ff')" class="w-5 h-5 bg-[#2c66ff] rounded shadow-sm hover:scale-110 transition-transform"></button>
+                        <button onclick="copyToClipboard('#ffa500')" class="w-5 h-5 bg-[#ffa500] rounded shadow-sm hover:scale-110 transition-transform"></button>
+                        <button onclick="copyToClipboard('#ff01ff')" class="w-5 h-5 bg-[#ff01ff] rounded shadow-sm hover:scale-110 transition-transform"></button>
+                        <button onclick="copyToClipboard('#F5F5F5')" class="w-5 h-5 bg-[#F5F5F5] rounded border shadow-sm hover:scale-110 transition-transform"></button>
+                        <button onclick="copyToClipboard('#3d3838')" class="w-5 h-5 bg-[#3d3838] rounded shadow-sm hover:scale-110 transition-transform"></button>
+                    </div>
+                </div>
+            </header>
+
+            <!-- CONTENIDO PRINCIPAL MAQUETADOR CON MÁRGENES UNIFICADOS (p-12) -->
+            <section class="flex-1 overflow-y-auto p-12 custom-scrollbar relative bg-davda-bg">
+                
+                <!-- Wrapper central unificado a 1200px max-width -->
+                <div style="max-width: 1200px; margin: 0 auto; width: 100%;">
+                    
+                    <!-- TÍTULO DE LA PÁGINA INDEPENDIENTE Y COMPARTIR -->
+                    <div class="mb-10 flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+                        <div>
+                            <h1 class="text-3xl font-black mb-2 text-davda-dark">Diseñador de retículas infográficas</h1>
+                            <p class="opacity-70">Conmutador de contenidos, coordenadas y filtros jerárquicos.</p>
+                        </div>
+                        <button onclick="copyToClipboard(window.location.href)" class="bg-davda-primary text-white px-4 py-2 rounded-lg font-bold text-xs uppercase tracking-widest hover:bg-davda-dark transition-colors flex items-center gap-2 shadow-sm shrink-0">
+                            <i class="fas fa-link"></i> Compartir
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-12">
+                        
+                        <!-- COLUMNA IZQUIERDA: CONTROLES ADAPTATIVOS -->
+                        <div class="lg:col-span-4 space-y-6">
+                            <div class="config-card">
+                                <h2 class="font-black text-davda-dark text-base mb-6 border-b border-gray-100 pb-4">Variables de arquitectura</h2>
+                                
+                                <div class="form-group">
+                                    <label class="form-label" for="formatSelect">Formato de proporción</label>
+                                    <select id="formatSelect" class="form-select">
+                                        <option value="horizontal">Horizontal (16:9 - presentaciones/LMS)</option>
+                                        <option value="vertical">Vertical (A4 - dossier/guía)</option>
+                                        <option value="tabloide">Tabloide (11x17 - infografía de muro)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label" for="gridSelect">Estrategia compositiva</label>
+                                    <select id="gridSelect" class="form-select">
+                                        <option value="columns">Retícula de columnas e hiladas</option>
+                                        <option value="modular">Retícula modular (matriz atómica)</option>
+                                        <option value="hierarchical">Retícula jerárquica (pedagógica)</option>
+                                    </select>
+                                </div>
+
+                                <div id="numericControls" class="grid grid-cols-2 gap-4 mb-4">
+                                    <div class="form-group mb-0">
+                                        <label class="form-label" for="colSelect">Columnas</label>
+                                        <select id="colSelect" class="form-select">
+                                            <option value="2">2 Col</option>
+                                            <option value="3">3 Col</option>
+                                            <option value="4" selected>4 Col</option>
+                                            <option value="6">6 Col</option>
+                                            <option value="12">12 Col</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-0">
+                                        <label class="form-label" for="rowSelect">Filas</label>
+                                        <select id="rowSelect" class="form-select">
+                                            <option value="2">2 Filas</option>
+                                            <option value="3" selected>3 Filas</option>
+                                            <option value="4">4 Filas</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div id="hierarchicalControls" class="form-group" style="display: none;">
+                                    <label class="form-label" for="variantSelect">Estructura de enfoque</label>
+                                    <select id="variantSelect" class="form-select">
+                                        <option value="left-focus">Foco izquierdo (anclaje asimétrico)</option>
+                                        <option value="center-focus">Foco central (esquema concéntrico)</option>
+                                        <option value="top-focus">Foco superior (diagrama hero editorial)</option>
+                                        <option value="split-comparative">Doble foco comparativo (50/50)</option>
+                                        <option value="zigzag-narrative">Secuencia en zigzag (flujo alternado)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mt-6">
+                                    <label id="gutterLabel" class="form-label" for="gutterSlider">Separación (medianil): 12px</label>
+                                    <input type="range" id="gutterSlider" class="form-range w-full accent-davda-primary" min="4" max="32" value="12" step="2">
+                                </div>
+
+                                <div class="form-group mt-6">
+                                    <label class="form-label" for="contentModeSelect">Simulación de contenido</label>
+                                    <select id="contentModeSelect" class="form-select">
+                                        <option value="text">Solo rótulos de texto</option>
+                                        <option value="mixed">Modo mixto (icono + concepto)</option>
+                                        <option value="chart">Modo data viz (estructuras gráficas)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group mt-8 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                                    <label class="switch-label">
+                                        <input type="checkbox" id="coordToggle" class="switch-input">
+                                        <div class="switch-button"></div>
+                                        <span>Mostrar coordenadas técnicas</span>
+                                    </label>
+                                </div>
+
+                                <a id="realDownloadBtn" class="btn-action mt-6" href="#">
+                                    <i class="fas fa-download"></i> Exportar plantilla .SVG
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- COLUMNA DERECHA: PORTA PREVISUALIZADOR -->
+                        <div class="lg:col-span-8 flex flex-col">
+                            <div class="config-card flex-1 flex flex-col">
+                                <h2 class="font-black text-davda-dark text-base mb-6 border-b border-gray-100 pb-4">Lienzo de simulación <span class="text-xs text-gray-400 font-semibold ml-2">Render en tiempo real</span></h2>
+                                
+                                <div class="preview-area flex-1">
+                                    <div id="canvasPreview" class="workspace-canvas horizontal">
+                                        <div class="canvas-header">
+                                            <div class="logo-placeholder">LOGO UNIACC</div>
+                                            <div class="header-title" id="canvasAcademicTitle">Área académica / título infografía</div>
+                                        </div>
+                                        
+                                        <div class="canvas-body">
+                                            <div class="canvas-safe-area"></div>
+                                            <div id="gridOverlayContainer" class="grid-overlay-container"></div>
+                                        </div>
+                                        
+                                        <div class="canvas-footer">
+                                            <span style="font-weight: 800; margin-bottom: 2px;">Referencias bibliográficas (norma APA):</span>
+                                            <span>Apellido, iniciales del nombre. (Año). <em style="font-style: italic; opacity: 0.8;">Título del libro o recurso didáctico en cursiva</em>. Editorial o unidad académica.</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN: ESPECIFICACIONES DE EXPORTACIÓN -->
+                    <h2 class="section-title">Especificaciones de exportación y optimización</h2>
+                    <div class="mb-6 p-4 bg-blue-50 border-l-4 border-davda-primary rounded-r-lg">
+                        <p class="text-sm text-gray-700 leading-relaxed">
+                            La elección del formato final (horizontal, vertical o tabloide) queda a criterio del diseñador gráfico, quien deberá evaluar la extensión, complejidad y naturaleza del contenido proporcionado. En el caso específico del formato tabloide, <strong>se requiere la entrega obligatoria de ambas versiones</strong> (web e impresión) para facilitar su visualización rápida en plataformas digitales y permitir su eventual impresión física por parte de docentes o estudiantes.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                        <div class="export-card">
+                            <h3><i class="fas fa-desktop"></i> 1. Horizontal (16:9)</h3>
+                            <ul>
+                                <li><strong>Uso:</strong> 100% digital. Pantallas y LMS.</li>
+                                <li><strong>Salida:</strong> PDF.</li>
+                                <li><strong>Perfil:</strong> sRGB (estricto).</li>
+                                <li><strong>Resolución:</strong> 72 a 96 ppi.</li>
+                                <li><strong>Peso max:</strong> 3 MB.</li>
+                            </ul>
+                        </div>
+                        <div class="export-card">
+                            <h3><i class="fas fa-file-alt"></i> 2. Vertical (A4)</h3>
+                            <ul>
+                                <li><strong>Uso:</strong> Híbrido web/impresión.</li>
+                                <li><strong>Salida:</strong> PDF optimizado.</li>
+                                <li><strong>Perfil:</strong> sRGB.</li>
+                                <li><strong>Resolución:</strong> 150 ppi.</li>
+                                <li><strong>Peso max:</strong> 3 MB.</li>
+                            </ul>
+                        </div>
+                        <div class="export-card border-l-4 border-l-davda-primary">
+                            <h3><i class="fas fa-scroll"></i> 3. Tabloide (11x17)</h3>
+                            <p class="text-[11px] text-gray-500 mb-3 leading-tight">Por sus grandes dimensiones, es obligatorio entregar <strong>dos archivos separados</strong>.</p>
+                            <ul>
+                                <li><strong>A. Web:</strong> PDF (Fast View), sRGB, 100-150 ppi, max 3 MB.</li>
+                                <li><strong>B. Print:</strong> PDF (High Quality), CMYK, 300 ppi, sin límite de peso.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN: GUÍA TIPOGRÁFICA -->
+                    <h2 class="section-title">Guía tipográfica Montserrat (sugerencias)</h2>
+                    <div class="considerations-box" style="border-left-color: #2c66ff;">
+                        <div class="cons-header">
+                            <strong class="text-davda-primary">Métricas sugeridas por formato</strong>
+                        </div>
+                        <div class="cons-content">
+                            <div class="overflow-x-auto">
+                                <table class="miv-table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 20%;">Rol del texto</th>
+                                            <th style="width: 20%;">Variante / peso</th>
+                                            <th style="width: 20%;">Horizontal (16:9)<br><span style="font-size: 10px; font-weight: 400; display:block; margin-top:2px;">Pantallas / LMS</span></th>
+                                            <th style="width: 20%;">Vertical (A4)<br><span style="font-size: 10px; font-weight: 400; display:block; margin-top:2px;">Documentos / guías</span></th>
+                                            <th style="width: 20%;">Tabloide (11x17)<br><span style="font-size: 10px; font-weight: 400; display:block; margin-top:2px;">Póster académico</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Título principal</strong></td>
+                                            <td>Bold (700)</td>
+                                            <td>48 pt / Interl: 56 pt<span class="miv-td-small">Track: -10</span></td>
+                                            <td>32 pt / Interl: 38 pt<span class="miv-td-small">Track: -10</span></td>
+                                            <td>64 pt / Interl: 72 pt<span class="miv-td-small">Track: -15</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Subtítulos / secciones</strong></td>
+                                            <td>SemiBold (600)</td>
+                                            <td>24 pt / Interl: 30 pt<span class="miv-td-small">Track: 0</span></td>
+                                            <td>18 pt / Interl: 22 pt<span class="miv-td-small">Track: 0</span></td>
+                                            <td>28 pt / Interl: 34 pt<span class="miv-td-small">Track: -5</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Cuerpo de texto</strong></td>
+                                            <td>Regular (400)</td>
+                                            <td>14 pt / Interl: 20 pt<span class="miv-td-small">Track: 0</span></td>
+                                            <td>10 pt / Interl: 14 pt<span class="miv-td-small">Track: 0</span></td>
+                                            <td>12 pt / Interl: 18 pt<span class="miv-td-small">Track: 0</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Destacados / macros</strong></td>
+                                            <td>Bold o Black</td>
+                                            <td>60 pt / Interl: 64 pt<span class="miv-td-small">Track: -20</span></td>
+                                            <td>42 pt / Interl: 46 pt<span class="miv-td-small">Track: -15</span></td>
+                                            <td>80 pt / Interl: 86 pt<span class="miv-td-small">Track: -20</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Referencias / footer</strong></td>
+                                            <td>Regular (400)</td>
+                                            <td>11 pt / Interl: 15 pt<span class="miv-td-small">Track: +10</span></td>
+                                            <td>8 pt / Interl: 11 pt<span class="miv-td-small">Track: +10</span></td>
+                                            <td>9 pt / Interl: 13 pt<span class="miv-td-small">Track: +10</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SECCIÓN: DO'S Y DONT'S -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                        <div class="bg-green-50 border-l-4 border-davda-success p-6 rounded-r-lg">
+                            <strong class="text-davda-success font-black text-sm mb-3 block"><i class="fas fa-check-circle mr-2"></i> Buenas prácticas sugeridas</strong>
+                            <ul class="list-disc list-inside text-xs text-gray-700 space-y-2 ml-2">
+                                <li>Alinear los elementos exactamente con las líneas de la cuadrícula para asegurar el orden visual.</li>
+                                <li>Mantener el fondo en blanco humo (<code>#f5f5f5</code>).</li>
+                                <li>Aplicar cursiva (<em>italic</em>) solo en títulos de recursos (APA).</li>
+                                <li>Usar la paleta institucional (azul, amarillo, magenta) libremente para jerarquizar.</li>
+                            </ul>
+                        </div>
+                        <div class="bg-red-50 border-l-4 border-davda-error p-6 rounded-r-lg">
+                            <strong class="text-davda-error font-black text-sm mb-3 block"><i class="fas fa-times-circle mr-2"></i> Restricciones sugeridas</strong>
+                            <ul class="list-disc list-inside text-xs text-gray-700 space-y-2 ml-2">
+                                <li>Deformar proporciones de la familia Montserrat.</li>
+                                <li>Usar tamaños inferiores a 9 pt para cuerpos de texto.</li>
+                                <li>Saturar módulos con párrafos (priorizar síntesis/listas).</li>
+                                <li>Incorporar familias tipográficas ajenas al manual.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- FOOTER INTERNO -->
+                    <footer class="border-t border-gray-200 pt-6 mt-12 pb-6 text-center">
+                        <p class="text-[11px] text-gray-500">
+                            Dudas o sugerencias: contactar al Coordinador Gráfico Multimedia, <a href="mailto:felipe.hernandez@uniacc.edu" class="text-davda-primary font-bold hover:underline">felipe.hernandez@uniacc.edu</a>.
+                        </p>
+                    </footer>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div class="toast" id="toastMsg">Acción procesada</div>
+
+    <!-- SCRIPT DEL MAQUETADOR INTEGRADO -->
+    <script>
+        function toggleMobileMenu() {
+            document.getElementById('mainSidebar').classList.toggle('active');
+            document.querySelector('.sidebar-overlay').classList.toggle('active');
+        }
+
+        function showToast(msg) { 
+            const toast = document.getElementById('toastMsg'); 
+            toast.innerText = msg; 
+            toast.classList.add('show'); 
+            setTimeout(() => toast.classList.remove('show'), 2500); 
+        }
+
+        function copyToClipboard(t) { 
+            navigator.clipboard.writeText(t).then(() => { showToast(`Copiado al portapapeles`); }); 
+        }
+
+        // Lógica del Configurador CGM Hub
+        const formatSelect = document.getElementById('formatSelect');
+        const gridSelect = document.getElementById('gridSelect');
+        const colSelect = document.getElementById('colSelect');
+        const rowSelect = document.getElementById('rowSelect');
+        const variantSelect = document.getElementById('variantSelect');
+        const gutterSlider = document.getElementById('gutterSlider');
+        const gutterLabel = document.getElementById('gutterLabel');
+        const contentModeSelect = document.getElementById('contentModeSelect');
+        const coordToggle = document.getElementById('coordToggle');
+        
+        const numericControls = document.getElementById('numericControls');
+        const hierarchicalControls = document.getElementById('hierarchicalControls');
+        const canvasPreview = document.getElementById('canvasPreview');
+        const gridOverlayContainer = document.getElementById('gridOverlayContainer');
+        const downloadBtn = document.getElementById('realDownloadBtn');
+
+        function getPlaceholderContent(blockType, label, coord) {
+            const mode = contentModeSelect.value;
+            const coordSpan = `<span class="technical-coord" style="display: ${coordToggle.checked ? 'block' : 'none'};">${coord}</span>`;
+            
+            if (mode === 'chart') {
+                return `${coordSpan}<span style="font-size:16px;margin-bottom:4px;">📊</span><strong style="color:#2c66ff; font-size:9px;">[Área gráfico]</strong>`;
+            } else if (mode === 'mixed') {
+                return `${coordSpan}<span style="font-size:14px;margin-bottom:2px;">💡</span><strong>${label}</strong><span style="font-size:8px;opacity:0.7;font-weight:600;margin-top:2px;">Icono + concepto</span>`;
+            }
+            return `${coordSpan}<strong>${label}</strong>`;
+        }
+
+        function renderLivePreview() {
+            const format = formatSelect.value;
+            const gridType = gridSelect.value;
+            const cols = parseInt(colSelect.value);
+            const rows = parseInt(rowSelect.value);
+            const variant = variantSelect.value;
+            const gutterVal = gutterSlider.value + "px";
+
+            gutterLabel.textContent = `Separación (medianil): ${gutterSlider.value}px`;
+
+            canvasPreview.className = "workspace-canvas " + format;
+            gridOverlayContainer.innerHTML = "";
+            gridOverlayContainer.removeAttribute('style');
+
+            if (gridType === 'hierarchical') {
+                numericControls.style.display = 'none';
+                hierarchicalControls.style.display = 'block';
+                
+                gridOverlayContainer.style.display = 'grid';
+                gridOverlayContainer.style.gap = gutterVal;
+
+                if (variant === 'left-focus') {
+                    gridOverlayContainer.style.gridTemplateColumns = '2.2fr 1fr';
+                    gridOverlayContainer.style.gridTemplateRows = '1fr 1fr';
+                    gridOverlayContainer.innerHTML = `
+                        <div class="wf-block wf-foco-principal" style="grid-row: span 2;">${getPlaceholderContent('main', 'Foco principal (65%)', 'F1-Principal')}</div>
+                        <div class="wf-block wf-foco-secundario">${getPlaceholderContent('side', 'Desglose A', 'F1-S1')}</div>
+                        <div class="wf-block wf-foco-secundario">${getPlaceholderContent('side', 'Desglose B', 'F1-S2')}</div>
+                    `;
+                } else if (variant === 'center-focus') {
+                    gridOverlayContainer.style.gridTemplateColumns = '1fr 2fr 1fr';
+                    gridOverlayContainer.innerHTML = `
+                        <div class="wf-block wf-foco-secundario">${getPlaceholderContent('side', 'Contexto inicial', 'F2-S1')}</div>
+                        <div class="wf-block wf-foco-principal">${getPlaceholderContent('main', 'Núcleo concéntrico (50%)', 'F2-Centro')}</div>
+                        <div class="wf-block wf-foco-secundario">${getPlaceholderContent('side', 'Contexto final', 'F2-S2')}</div>
+                    `;
+                } else if (variant === 'top-focus') {
+                    gridOverlayContainer.style.gridTemplateColumns = 'repeat(3, 1fr)';
+                    gridOverlayContainer.style.gridTemplateRows = '1.2fr 1fr';
+                    gridOverlayContainer.innerHTML = `
+                        <div class="wf-block wf-foco-principal" style="grid-column: span 3;">${getPlaceholderContent('main', 'Hero banner inicial', 'F3-Hero')}</div>
+                        <div class="wf-block wf-foco-terciario">${getPlaceholderContent('third', 'Pilar 01', 'F3-P1')}</div>
+                        <div class="wf-block wf-foco-terciario">${getPlaceholderContent('third', 'Pilar 02', 'F3-P2')}</div>
+                        <div class="wf-block wf-foco-terciario">${getPlaceholderContent('third', 'Pilar 03', 'F3-P3')}</div>
+                    `;
+                } else if (variant === 'split-comparative') {
+                    gridOverlayContainer.style.gridTemplateColumns = '1fr 1fr';
+                    gridOverlayContainer.innerHTML = `
+                        <div class="wf-block wf-foco-principal" style="border-color: #2c66ff; background-color: rgba(44,102,255,0.04);">${getPlaceholderContent('main', 'Escenario A (50%)', 'F4-TA')}</div>
+                        <div class="wf-block wf-foco-principal" style="border-color: #ff01ff; background-color: rgba(255,1,255,0.04); color: #ff01ff;">${getPlaceholderContent('main', 'Escenario B (50%)', 'F4-TB')}</div>
+                    `;
+                } else if (variant === 'zigzag-narrative') {
+                    gridOverlayContainer.style.gridTemplateColumns = '1fr 1fr';
+                    gridOverlayContainer.style.gridTemplateRows = '1fr 1fr 1fr';
+                    gridOverlayContainer.innerHTML = `
+                        <div class="wf-block wf-foco-principal">${getPlaceholderContent('main', 'Paso 01', 'Z1-P1')}</div>
+                        <div class="wf-block" style="opacity:0.4; border-style:solid; border-color:#cbd5e1; color:#9ca3af;">Tránsito</div>
+                        <div class="wf-block" style="opacity:0.4; border-style:solid; border-color:#cbd5e1; color:#9ca3af;">Tránsito</div>
+                        <div class="wf-block wf-foco-secundario">${getPlaceholderContent('side', 'Paso 02', 'Z1-P2')}</div>
+                        <div class="wf-block wf-foco-terciario">${getPlaceholderContent('third', 'Paso 03', 'Z1-P3')}</div>
+                        <div class="wf-block" style="opacity:0.4; border-style:solid; border-color:#cbd5e1; color:#9ca3af;">Fin</div>
+                    `;
+                }
+                return;
+            }
+
+            numericControls.style.display = 'grid';
+            hierarchicalControls.style.display = 'none';
+
+            if (gridType === 'columns') {
+                gridOverlayContainer.style.display = 'block';
+                
+                let colHtml = `<div style="display:grid; grid-template-columns:repeat(${cols}, 1fr); gap:${gutterVal}; width:100%; height:100%; position:absolute; top:0; left:0;">`;
+                for(let i=0; i<cols; i++) {
+                    colHtml += `<div class="wf-block" style="background-color:rgba(255, 1, 255, 0.04); border:1px dashed rgba(255, 1, 255, 0.3); height:100%; color:#cc00cc;">
+                        <span class="technical-coord" style="display: ${coordToggle.checked ? 'block' : 'none'};">Col ${i+1}</span>Col ${i+1}
+                    </div>`;
+                }
+                colHtml += `</div>`;
+
+                let rowHtml = `<div style="display:grid; grid-template-rows:repeat(${rows}, 1fr); gap:${gutterVal}; width:100%; height:100%; position:absolute; top:0; left:0; pointer-events:none;">`;
+                for(let j=0; j<rows; j++) {
+                    rowHtml += `<div style="border-bottom:2px dashed rgba(44, 102, 255, 0.3); height:100%; display:flex; align-items:flex-end; padding-bottom:4px; font-size:10px; color:#2c66ff; font-weight:800; padding-left:6px;">Línea hilada ${j+1}</div>`;
+                }
+                rowHtml += `</div>`;
+
+                gridOverlayContainer.innerHTML = colHtml + rowHtml;
+                
+            } else if (gridType === 'modular') {
+                gridOverlayContainer.style.display = 'grid';
+                gridOverlayContainer.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+                gridOverlayContainer.style.gridTemplateRows = `repeat(${rows}, 1fr)`;
+                gridOverlayContainer.style.gap = gutterVal;
+
+                let totalCells = cols * rows;
+                let html = '';
+                for (let i = 0; i < totalCells; i++) {
+                    let cIndex = (i % cols) + 1;
+                    let rIndex = Math.floor(i / cols) + 1;
+                    let currentCoord = `C${cIndex}-F${rIndex}`;
+                    
+                    html += `<div class="wf-block" style="border: 1px solid #d1d5db; background-color: #ffffff; color: #6b7280;">
+                        ${getPlaceholderContent('mod', `Módulo [${i+1}]`, currentCoord)}
+                    </div>`;
+                }
+                gridOverlayContainer.innerHTML = html;
+            }
+        }
+
+        function buildSVGFile(format, gridType, colCount, rowCount, variant, gutterVal) {
+            let width, height;
+            if (format === 'horizontal') { width = 1920; height = 1080; } 
+            else if (format === 'vertical') { width = 794; height = 1123; } 
+            else if (format === 'tabloide') { width = 1056; height = 1632; }
+
+            const footerHeight = height * 0.14;
+            const headerHeight = height * 0.12;
+            
+            // Colores Institucionales
+            const cPrimary = "#2c66ff"; // Azul
+            const cSecondary = "#ffa500"; // Amarillo
+            const cAccent = "#ff01ff"; // Magenta
+
+            let svg = `<?xml version="1.0" encoding="utf-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${width} ${height}" width="${width}" height="${height}">
+    <g id="Mesa_Trabajo_Fondo">
+        <rect width="${width}" height="${height}" fill="#F5F5F5"/>
+    </g>
+    
+    <g id="Estructura_Institucional_UNIACC">
+        <rect x="0" y="0" width="${width}" height="${headerHeight}" fill="#FFFFFF"/>
+        <rect x="80" y="${headerHeight / 2 - 30}" width="180" height="60" fill="#f8fafc" rx="4" stroke="#9ca3af" stroke-width="1" stroke-dasharray="4,4"/>
+        <text x="170" y="${headerHeight / 2 + 5}" font-family="Montserrat, sans-serif" font-size="13" fill="${cPrimary}" font-weight="bold" text-anchor="middle">RESERVA LOGO UNIACC</text>
+        <text x="290" y="${headerHeight / 2 + 10}" font-family="Montserrat, sans-serif" font-size="26" fill="${cPrimary}" font-weight="bold">Área académica / título infografía</text>
+        
+        <rect x="0" y="${height - footerHeight}" width="${width}" height="${footerHeight}" fill="${cPrimary}"/>
+        <text x="80" y="${height - footerHeight + 35}" font-family="Montserrat, sans-serif" font-size="14" fill="#FFFFFF" font-weight="bold">Referencias bibliográficas (norma APA):</text>
+        <text x="80" y="${height - footerHeight + 65}" font-family="Montserrat, sans-serif" font-size="14" fill="#FFFFFF" font-weight="400">Apellido, iniciales del nombre. (Año). <tspan font-style="italic">Título del libro o recurso didáctico en cursiva</tspan>. Editorial o unidad académica.</text>
+    </g>
+    
+    <g id="Margen_seguridad">
+        <rect x="80" y="${headerHeight + 40}" width="${width - 160}" height="${height - headerHeight - footerHeight - 80}" fill="none" stroke="${cPrimary}" stroke-width="2" stroke-dasharray="10,5" opacity="0.25"/>
+    </g>
+`;
+
+            const margin = 80;
+            const topZone = headerHeight + 40;
+            const bottomZone = height - footerHeight - 40;
+            const workWidth = width - (margin * 2);
+            const workHeight = bottomZone - topZone;
+
+            if (gridType === 'columns') {
+                const cWidth = (workWidth - ((colCount - 1) * gutterVal)) / colCount;
+                const rHeight = (workHeight - ((rowCount - 1) * gutterVal)) / rowCount;
+
+                svg += `    <g id="Columnas_Guia_Vertical" opacity="0.12">\n`;
+                for(let i=0; i<colCount; i++) {
+                    let x = margin + (i * (cWidth + gutterVal));
+                    svg += `        <rect x="${x}" y="${topZone}" width="${cWidth}" height="${workHeight}" fill="${cAccent}"/>\n`;
+                }
+                svg += `    </g>\n    <g id="Hiladas_Guia_Horizontal" opacity="0.15">\n`;
+                for(let j=0; j<rowCount; j++) {
+                    let y = topZone + (j * (rHeight + gutterVal));
+                    svg += `        <rect x="${margin}" y="${y}" width="${workWidth}" height="${rHeight}" fill="${cPrimary}"/>\n`;
+                }
+                svg += `    </g>\n`;
+            } 
+            else if (gridType === 'modular') {
+                const cellW = (workWidth - ((colCount - 1) * gutterVal)) / colCount;
+                const cellH = (workHeight - ((rowCount - 1) * gutterVal)) / rowCount;
+
+                svg += `    <g id="Matriz_Modulos_Cerrados">\n`;
+                for(let r=0; r<rowCount; r++) {
+                    for(let c=0; c<colCount; c++) {
+                        let x = margin + (c * (cellW + gutterVal));
+                        let y = topZone + (r * (cellH + gutterVal));
+                        svg += `        <rect x="${x}" y="${y}" width="${cellW}" height="${cellH}" fill="#FFFFFF" stroke="#d1d5db" stroke-width="2"/>\n`;
+                    }
+                }
+                svg += `    </g>\n`;
+            } 
+            else if (gridType === 'hierarchical') {
+                svg += `    <g id="Estructuras_Jerarquicas_Wireframe">\n`;
+                if (variant === 'left-focus') {
+                    const mainW = (workWidth * 0.65) - (gutterVal / 2);
+                    const sideX = margin + mainW + gutterVal;
+                    const sideW = workWidth - mainW - gutterVal;
+                    const sideH = (workHeight * 0.5) - (gutterVal / 2);
+                    
+                    svg += `        <rect x="${margin}" y="${topZone}" width="${mainW}" height="${workHeight}" fill="${cPrimary}" opacity="0.07" stroke="${cPrimary}" stroke-width="2"/>\n`;
+                    svg += `        <rect x="${sideX}" y="${topZone}" width="${sideW}" height="${sideH}" fill="${cSecondary}" opacity="0.12" stroke="${cSecondary}" stroke-width="2" stroke-dasharray="6,4"/>\n`;
+                    svg += `        <rect x="${sideX}" y="${topZone + sideH + gutterVal}" width="${sideW}" height="${sideH}" fill="${cSecondary}" opacity="0.12" stroke="${cSecondary}" stroke-width="2" stroke-dasharray="6,4"/>\n`;
+                } else if (variant === 'center-focus') {
+                    const sideW = (workWidth * 0.25) - (gutterVal / 2);
+                    const mainW = workWidth * 0.50;
+                    
+                    svg += `        <rect x="${margin}" y="${topZone}" width="${sideW}" height="${workHeight}" fill="${cSecondary}" opacity="0.12" stroke="${cSecondary}" stroke-width="2" stroke-dasharray="6,4"/>\n`;
+                    svg += `        <rect x="${margin + sideW + gutterVal}" y="${topZone}" width="${mainW}" height="${workHeight}" fill="${cPrimary}" opacity="0.07" stroke="${cPrimary}" stroke-width="2"/>\n`;
+                    svg += `        <rect x="${margin + sideW + mainW + (gutterVal * 2)}" y="${topZone}" width="${sideW}" height="${workHeight}" fill="${cSecondary}" opacity="0.12" stroke="${cSecondary}" stroke-width="2" stroke-dasharray="6,4"/>\n`;
+                } else if (variant === 'top-focus') {
+                    const heroH = (workHeight * 0.45) - (gutterVal / 2);
+                    const subY = topZone + heroH + gutterVal;
+                    const subH = workHeight - heroH - gutterVal;
+                    const subW = (workWidth - (gutterVal * 2)) / 3;
+                    
+                    svg += `        <rect x="${margin}" y="${topZone}" width="${workWidth}" height="${heroH}" fill="${cPrimary}" opacity="0.07" stroke="${cPrimary}" stroke-width="2"/>\n`;
+                    svg += `        <rect x="${margin}" y="${subY}" width="${subW}" height="${subH}" fill="${cAccent}" opacity="0.06" stroke="${cAccent}" stroke-width="2" stroke-dasharray="6,4"/>\n`;
+                    svg += `        <rect x="${margin + subW + gutterVal}" y="${subY}" width="${subW}" height="${subH}" fill="${cAccent}" opacity="0.06" stroke="${cAccent}" stroke-width="2" stroke-dasharray="6,4"/>\n`;
+                    svg += `        <rect x="${margin + (subW * 2) + (gutterVal * 2)}" y="${subY}" width="${subW}" height="${subH}" fill="${cAccent}" opacity="0.06" stroke="${cAccent}" stroke-width="2" stroke-dasharray="6,4"/>\n`;
+                } else if (variant === 'split-comparative') {
+                    const splitW = (workWidth - gutterVal) / 2;
+                    svg += `        <rect x="${margin}" y="${topZone}" width="${splitW}" height="${workHeight}" fill="${cPrimary}" opacity="0.07" stroke="${cPrimary}" stroke-width="2"/>\n`;
+                    svg += `        <rect x="${margin + splitW + gutterVal}" y="${topZone}" width="${splitW}" height="${workHeight}" fill="${cAccent}" opacity="0.05" stroke="${cAccent}" stroke-width="2"/>\n`;
+                } else if (variant === 'zigzag-narrative') {
+                    const cellW = (workWidth - gutterVal) / 2;
+                    const cellH = (workHeight - (gutterVal * 2)) / 3;
+                    svg += `        <rect x="${margin}" y="${topZone}" width="${cellW}" height="${cellH}" fill="${cPrimary}" opacity="0.07" stroke="${cPrimary}" stroke-width="2"/>\n`;
+                    svg += `        <rect x="${margin + cellW + gutterVal}" y="${topZone + cellH + gutterVal}" width="${cellW}" height="${cellH}" fill="${cSecondary}" opacity="0.12" stroke="${cSecondary}" stroke-width="2"/>\n`;
+                    svg += `        <rect x="${margin}" y="${topZone + (cellH * 2) + (gutterVal * 2)}" width="${cellW}" height="${cellH}" fill="${cAccent}" opacity="0.06" stroke="${cAccent}" stroke-width="2"/>\n`;
+                }
+                svg += `    </g>\n`;
+            }
+
+            svg += `</svg>`;
+            return svg;
+        }
+
+        let internalBlobUrl = null;
+
+        function executeDownload(e) {
+            e.preventDefault();
+            const format = formatSelect.value;
+            const gridType = gridSelect.value;
+            const cols = colSelect.value;
+            const rows = rowSelect.value;
+            const variant = variantSelect.value;
+            const gutterVal = parseInt(gutterSlider.value);
+
+            const name = `plantilla_uniacc_${format}_${gridType === 'hierarchical' ? variant : 'matriz_'+cols+'x'+rows}.svg`;
+            const svgContent = buildSVGFile(format, gridType, parseInt(cols), parseInt(rows), variant, gutterVal);
+
+            if (internalBlobUrl) URL.revokeObjectURL(internalBlobUrl);
+
+            const blob = new Blob([svgContent], { type: 'image/svg+xml;charset=utf-8' });
+            internalBlobUrl = URL.createObjectURL(blob);
+
+            const tempLink = document.createElement('a');
+            tempLink.href = internalBlobUrl;
+            tempLink.download = name;
+            document.body.appendChild(tempLink);
+            tempLink.click();
+            document.body.removeChild(tempLink);
+            
+            showToast("Plantilla SVG generada. Iniciando descarga...");
+        }
+
+        // Listeners
+        [formatSelect, gridSelect, colSelect, rowSelect, variantSelect, gutterSlider, contentModeSelect].forEach(element => {
+            element.addEventListener('change', renderLivePreview);
+            element.addEventListener('input', renderLivePreview);
+        });
+
+        coordToggle.addEventListener('change', () => {
+            const coordinates = document.querySelectorAll('.technical-coord');
+            coordinates.forEach(coord => {
+                coord.style.display = coordToggle.checked ? 'block' : 'none';
+            });
+        });
+
+        downloadBtn.addEventListener('click', executeDownload);
+        window.addEventListener('DOMContentLoaded', renderLivePreview);
+    </script>
+</body>
+</html>
