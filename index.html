@@ -66,12 +66,6 @@
         .btn-action:hover { background-color: #3d3838; }
         .btn-disabled { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; background-color: #f3f4f6; color: #9ca3af; padding: 10px; border-radius: 6px; font-weight: 800; text-transform: uppercase; border: 1px solid #e5e7eb; cursor: not-allowed; font-size: 12px; }
 
-        .check-item { display: flex; align-items: flex-start; gap: 12px; padding: 10px; border-radius: 6px; transition: background 0.2s; cursor: pointer; }
-        .check-item:hover { background-color: #f8faff; }
-        .check-item span { transition: all 0.2s; }
-        .check-item input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; cursor: pointer; accent-color: #2c66ff; }
-        .check-item input:checked + span { color: #9ca3af; text-decoration: line-through; }
-
         #newsPanel { position: fixed; right: -400px; top: 0; width: 380px; height: 100vh; background: white; z-index: 100; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); border-left: 1px solid #e5e7eb; display: flex; flex-direction: column; }
         #newsPanel.open { right: 0; }
         .news-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.2); backdrop-filter: blur(2px); z-index: 90; display: none; }
@@ -132,7 +126,7 @@
                         <span class="text-xl">✅</span>
                         <div>
                             <h3 class="font-bold text-sm">Aplica el QA</h3>
-                            <p class="text-[11px] text-gray-500">Todo material debe cumplir con sus respectivas <b>Consideraciones de uso</b> y checklists de calidad antes de exportarse.</p>
+                            <p class="text-[11px] text-gray-500">Todo material debe cumplir con sus respectivas <b>Consideraciones de uso</b> y estándares de calidad institucional antes de exportarse.</p>
                         </div>
                     </div>
                     <div class="flex gap-4">
@@ -157,7 +151,7 @@
         </div>
         <div class="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar" id="newsContainer"></div>
         <div class="p-6 border-t border-gray-100 bg-gray-50 text-[10px] text-gray-400 text-center">
-            Próxima depuración programada: <b>Julio 2026</b>
+            Próxima depuración programada: <b>Octubre 2026</b>
         </div>
     </aside>
 
@@ -190,12 +184,11 @@
                 <button onclick="showIndependent('manual', this)" class="nav-link"><i class="fas fa-book mr-3"></i> Manual de Identidad Visual</button>
                 <button onclick="showIndependent('color', this)" class="nav-link"><i class="fas fa-palette mr-3"></i> Sistema de Color</button>
                 <button onclick="window.location.href='maqueta.html'" class="nav-link"><i class="fas fa-border-all mr-3"></i> Diseñador de retículas</button>
-                <button onclick="showIndependent('checklist', this)" class="nav-link opacity-60"><i class="fas fa-lock mr-3"></i> Check list de Calidad</button>
             </nav>
 
             <div class="p-6 border-t border-white/5">
                 <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold text-center">
-                    ÚLTIMA EDICIÓN: <span style="color: #F5F5F5;">17 DE JUNIO</span>, 2026
+                    ÚLTIMA EDICIÓN: <span style="color: #F5F5F5;">26 DE AGOSTO</span>, 2026
                 </p>
             </div>
         </aside>
@@ -563,7 +556,7 @@
                                     <h4 class="font-bold">2. Clara (estructura y usabilidad)</h4>
                                     <p>El diseño debe guiar al usuario de forma fácil e intuitiva.</p>
                                     <ul class="list-disc list-inside ml-4">
-                                        <li>Crea un hilo conductor con un orden lógico de lectura.</li>
+                                        <li>Crea un hilo conductor con un orden logical de lectura.</li>
                                         <li>Elimina toda información redundante o innecesaria.</li>
                                         <li>Usa iconos inconfundibles y textos concisos y legibles.</li>
                                         <li>Adapta perfectamente el contenido al soporte donde se va a visualizar (móvil, web, impreso).</li>
@@ -639,7 +632,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 video-animacion mb-12">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 video-animacion mb-12">
                         <div class="card-asset video-animacion">
                             <div class="thumb-container ratio-16-9">
                                 <span class="tag-format" onclick="filterByTag(this.innerText, event)" style="text-transform: none;">.Ai</span>
@@ -706,9 +699,37 @@
                                 <a href="https://drive.google.com/open?id=1p0VYpZAnkn8tHadw_TR1QPfIiHk4pXux&usp=drive_fs" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
+                        <div class="card-asset video-animacion">
+                            <div class="thumb-container ratio-16-9">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)">Audio</span>
+                                <img src="img/podcast_intro_cierre.jpg" class="thumb-img cover-img" onerror="this.src='img/no.png'">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">06 Videos</span>
+                                <h3 class="font-bold mb-5 text-[13px]">Audios</h3>
+                                <a href="https://drive.google.com/drive/folders/1grrdc-mSm6NlwM-goTi5ouBuQH1z_DqW" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
+                            </div>
+                        </div>
                     </div>
 
                     <h2 class="section-title podcast">Podcast</h2>
+                    <div class="considerations-box podcast" style="border-left-color: #2c66ff;">
+                        <div class="cons-header" onclick="toggleCons(this)">
+                            <strong class="text-davda-primary">Podcast • Lineamientos de locución y selección de voces</strong>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="cons-content space-y-3">
+                            <p>Para asegurar una identidad sonora profesional, coherente y cercana a nuestro contexto, se recomienda priorizar perfiles vocales de modulación local y natural según el propósito pedagógico de cada pieza:</p>
+                            <div class="p-3 bg-gray-50 rounded-lg border border-gray-100">
+                                <span class="font-bold text-[11px] text-davda-primary block mb-1">Voces sugeridas para locución:</span>
+                                <p class="font-semibold text-davda-dark">Alberto, Fernanda Olea, Juan Carlos 1, Marco, Mateo impactado, Valentina, Valeria, Gonzalo, José S y Rafael R.</p>
+                            </div>
+                            <ul class="list-disc list-inside text-gray-600 space-y-1 text-[11px]">
+                                <li><b>Objetivo del recurso:</b> Adapta el ritmo, la solemnidad y el tono vocal según el contenido temático de la cápsula.</li>
+                                <li><b>Naturalidad y cercanía:</b> Evita entonaciones artificiales y busca una cadencia fluida que facilite la comprensión auditiva del estudiante.</li>
+                            </ul>
+                        </div>
+                    </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 podcast mb-12">
                         <div class="card-asset podcast">
                             <div class="thumb-container ratio-square">
@@ -732,6 +753,17 @@
                                 <a href="https://drive.google.com/drive/u/1/folders/1JISyI4EibOKqeyZGHWjvrvBSgat67Y9f" target="_blank" class="btn-action mt-auto"><i class="fas fa-folder-open"></i> Carpeta</a>
                             </div>
                         </div>
+                        <div class="card-asset podcast">
+                            <div class="thumb-container ratio-square">
+                                <span class="tag-format" onclick="filterByTag(this.innerText, event)" style="text-transform: uppercase;">Guía</span>
+                                <img src="img/elevelabs_chile.jpg" class="thumb-img cover-img" onerror="this.src='img/no.png'">
+                            </div>
+                            <div class="p-5 flex flex-col flex-1">
+                                <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">07 Podcast</span>
+                                <h3 class="font-bold mb-5 text-[13px]">ElevenLabs Español</h3>
+                                <a href="https://drive.google.com/file/d/14-6aKeAxlxmgwLnQMWmqa3MIit0Y53Dv/view" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
+                            </div>
+                        </div>
                     </div>
 
                     <h2 class="section-title toolbox">Multimedia Toolbox • IA y Software</h2>
@@ -741,7 +773,7 @@
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="cons-content">
-                            <p>El acceso a herramientas e IA (Envato, Napkin y Eleven Labs) se gestiona a través del Coordinador Gráfico Multimedia.</p>
+                            <p>El acceso a herramientas e IA (Envato, Napkin y Eleven Labs) se gestiona a través del Coordinador Gráfico Multimedia[cite: 1].</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8 toolbox mb-12">
@@ -753,7 +785,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Upscayl</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Aumenta la resolución mediante IA sin perder calidad.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Aumenta la resolución mediante IA sin perder calidad[cite: 1].</p>
                                 <a href="https://upscayl.org/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -765,7 +797,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Adobe Firefly</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Generación y edición de imágenes mediante prompts de texto.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Generación y edición de imágenes mediante prompts de texto[cite: 1].</p>
                                 <a href="https://firefly.adobe.com/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -777,7 +809,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Cleanup.pictures</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Elimina objetos o personas de cualquier fotografía rápidamente.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Elimina objetos o personas de cualquier fotografía rápidamente[cite: 1].</p>
                                 <a href="https://cleanup.pictures/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -789,7 +821,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Adobe Podcast</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Limpia el ruido de fondo de audios para calidad de estudio.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Limpia el ruido de fondo de audios para calidad de estudio[cite: 1].</p>
                                 <a href="https://podcast.adobe.com/a" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -801,7 +833,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Napkin AI</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Genera gráficos y diagramas a partir de texto de forma inmediata.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Genera gráficos y diagramas a partir de texto de forma inmediata[cite: 1].</p>
                                 <a href="https://www.napkin.ai/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -813,7 +845,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Adobe Audition</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Software para edición, mezcla y restauración de audio profesional.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Software para edición, mezcla y restauración de audio profesional[cite: 1].</p>
                                 <a href="https://www.adobe.com/es/products/audition.html?msockid=143d5b1612b96c0f3fc34dd513386d82" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -825,7 +857,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Premiere Pro</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Editor de video líder en la industria para cine, TV y web.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Editor de video líder en la industria para cine, TV y web[cite: 1].</p>
                                 <a href="https://www.adobe.com/es/products/premiere.html?msockid=143d5b1612b96c0f3fc34dd513386d82" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -837,7 +869,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Mr. Horse</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Plugin esencial para transiciones y animaciones rápidas en AE y Premiere.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Plugin esencial para transiciones y animaciones rápidas en AE y Premiere[cite: 1].</p>
                                 <a href="https://misterhorse.com/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -849,7 +881,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">ElevenLabs</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Generador de voz con IA y herramientas de texto a voz de alta calidad.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Generador de voz con IA y herramientas de texto a voz de alta calidad[cite: 1].</p>
                                 <a href="https://elevenlabs.io/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -865,7 +897,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Envato Elements</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Librería gigante de recursos, gráficos, plantillas y música.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Librería gigante de recursos, gráficos, plantillas y música[cite: 1].</p>
                                 <a href="https://app.envato.com/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -877,7 +909,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Pexels</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Banco gratuito de videos y fotos de alta calidad y resolución.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Banco gratuito de videos y fotos de alta calidad y resolución[cite: 1].</p>
                                 <a href="https://www.pexels.com/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -889,7 +921,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Pixabay</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Comunidad vibrante de autores compartiendo videos y recursos libres de derechos.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Comunidad vibrante de autores compartiendo videos y recursos libres de derechos[cite: 1].</p>
                                 <a href="https://pixabay.com/es/" target="_blank" class="btn-action mt-auto"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -901,7 +933,7 @@
                             <div class="p-5 flex flex-col flex-1">
                                 <span class="text-[9px] font-extrabold text-gray-400 uppercase tracking-widest mb-1">08 Multimedia Toolbox</span>
                                 <h3 class="font-bold mb-1 text-[13px]">Coverr</h3>
-                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Videos de stock cinemáticos y hermosos, listos para descargar gratis.</p>
+                                <p class="text-[10px] leading-tight text-gray-500 mb-4">Videos de stock cinemáticos y hermosos, listos para descargar gratis[cite: 1].</p>
                                 <a href="https://coverr.co/" target="_blank" class="btn-auto mt-auto btn-action"><i class="fas fa-external-link-alt"></i> Ver enlace</a>
                             </div>
                         </div>
@@ -966,13 +998,9 @@
                 <div id="independentContent" class="color-page-container"></div>
             </section>
 
-            <section id="independentPage" class="flex-1 overflow-y-auto p-12 custom-scrollbar bg-davda-bg">
-                <div id="independentContent" class="color-page-container"></div>
-            </section>
-
             <footer class="bg-white border-t border-gray-200 p-3 text-center">
                 <p class="text-[11px] text-gray-500 footer-text">
-                    Dudas o sugerencias: contactar al Coordinador Gráfico Multimedia, <a href="mailto:felipe.hernandez@uniacc.edu" class="text-davda-primary font-bold hover:underline">felipe.hernandez@uniacc.edu</a>.
+                    Dudas o sugerencias: contactar al Coordinador Gráfico Multimedia, <a href="mailto:felipe.hernandez@uniacc.edu" class="text-davda-primary font-bold hover:underline">felipe.hernandez@uniacc.edu</a>[cite: 1].
                 </p>
             </footer>
         </main>
@@ -992,10 +1020,10 @@
         };
 
         const novedadesData = [
+            { fecha: "26 de agosto, 2026", titulo: "Integración de recursos para Podcast y Video", desc: "Se habilitó la tarjeta 'Audios' en la sección Videos. En la sección Podcast se incorporó el recurso 'ElevenLabs Español' y las consideraciones con recomendaciones vocales institucionales.", tipo: "Mejora" },
             { fecha: "17 de junio, 2026", titulo: "Habilitación de packs audiovisuales institucionales", desc: "Se integraron exitosamente los recursos maestros para video correspondientes a las variantes cromáticas 'Pack Amarillo' y 'Pack Magenta' vinculando sus repositorios oficiales en Drive.", tipo: "Mejora" },
             { fecha: "04 de junio, 2026", titulo: "Actualización del Manual de Identidad Visual", desc: "Se reestructuró la sección con una nueva grilla de tarjetas que da acceso directo a los 5 volúmenes de lineamientos y presentaciones base.", tipo: "Mejora" },
             { fecha: "04 de junio, 2026", titulo: "Lanzamiento del diseñador de retículas infográficas", desc: "Se integró una nueva herramienta avanzada para la creación y exportación de estructuras base y grillas constructivas en formato SVG.", tipo: "Mejora" },
-            { fecha: "04 de junio, 2026", titulo: "Desactivación temporal del check list de calidad", desc: "La sección de listas de verificación se encuentra temporalmente fuera de servicio por un proceso de revisión y optimización institucional.", tipo: "Aviso" },
             { fecha: "29 de mayo, 2026", titulo: "Actualización de videos y bancos de stock", desc: "Se agregó la tarjeta de Miniatura para YouTube (.Ai) en la sección Videos y los bancos gratuitos Pexels, Pixabay y Coverr.", tipo: "Mejora" },
             { fecha: "14 de mayo, 2026", titulo: "Nuevas funcionalidades: Deep Linking y Mobile UX", desc: "Se agregó el menú hamburguesa responsivo y soporte para enlaces directos (#seccion) para facilitar la colaboración.", tipo: "Mejora" },
             { fecha: "05 de mayo, 2026", titulo: "Integración de Multimedia Toolbox y Podcast", desc: "Se habilitaron los archivos de la sección Podcast y la nueva categoría Multimedia Toolbox con herramientas de IA, programas y plugins.", tipo: "Mejora" },
@@ -1241,21 +1269,13 @@
                         </div>
                     </div>
                 `;
-            } else if(type === 'checklist') {
-                content.innerHTML = `
-                    <div class="flex flex-col items-center justify-center h-full text-center py-24">
-                        <i class="fas fa-tools text-6xl text-gray-300 mb-6"></i>
-                        <h2 class="text-2xl font-black text-davda-dark mb-2">Sección en actualización</h2>
-                        <p class="text-gray-500 max-w-md mx-auto leading-relaxed">Los checklist de calidad no están disponibles en este momento ya que se encuentran en proceso de revisión y mejora para asegurar el estándar institucional.</p>
-                    </div>
-                `;
             }
         }
 
         function handleHash() {
             const hash = window.location.hash.substring(1);
             if (!hash) return;
-            const indep = ['manual', 'color', 'checklist'];
+            const indep = ['manual', 'color'];
             if (indep.includes(hash)) { showIndependent(hash, document.querySelector(`[onclick*="'${hash}'"]`)); }
             else { filterSelection(hash, document.querySelector(`[onclick*="'${hash}'"]`)); }
         }
