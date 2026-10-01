@@ -40,6 +40,17 @@
         .cons-content { padding: 0 16px 16px 16px; display: block; font-size: 12px; color: #3d3838; line-height: 1.6; }
         .cons-header strong { font-size: 13px; text-transform: none; }
 
+        /* MODALES E HISTORIAL (Heredado de Index) */
+        #newsPanel { position: fixed; right: -400px; top: 0; width: 380px; height: 100vh; background: white; z-index: 100; box-shadow: -10px 0 30px rgba(0,0,0,0.1); transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1); border-left: 1px solid #e5e7eb; display: flex; flex-direction: column; }
+        #newsPanel.open { right: 0; }
+        .news-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.2); backdrop-filter: blur(2px); z-index: 90; display: none; }
+        .news-overlay.open { display: block; }
+        .news-badge { position: absolute; top: -2px; right: -2px; width: 8px; height: 8px; background: #ef4444; border-radius: 50%; border: 2px solid white; }
+        .news-badge.hidden { display: none; }
+
+        #rulesModal { position: fixed; inset: 0; background: rgba(0,0,0,0.6); backdrop-filter: blur(4px); z-index: 300; display: none; align-items: center; justify-content: center; padding: 20px; }
+        .modal-content { background: white; max-width: 500px; width: 100%; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.5); }
+
         .toast { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%) translateY(100px); background: #3d3838; color: #f5f5f5; padding: 12px 24px; border-radius: 30px; transition: transform 0.3s ease; z-index: 2000; font-weight: bold; }
         .toast.show { transform: translateX(-50%) translateY(0); }
 
@@ -108,69 +119,136 @@
 </head>
 <body class="flex flex-col h-screen overflow-hidden">
 
+    <div class="news-overlay" onclick="toggleNews()"></div>
     <div class="sidebar-overlay" onclick="toggleMobileMenu()"></div>
 
+    <!-- MODAL DE REGLAS GLOBALES -->
+    <div id="rulesModal">
+        <div class="modal-content">
+            <div class="bg-davda-primary p-8 text-white text-center">
+                <div class="text-4xl mb-4">🔒</div>
+                <h2 class="text-xl font-black leading-tight">¡Bienvenido a DAVDA<br>Recursos Gráficos Multimedia!</h2>
+            </div>
+            <div class="p-8">
+                <p class="text-gray-500 text-xs mb-6 text-center">Para mantener el orden y la calidad visual de nuestros proyectos, es indispensable aplicar estas <b>3 reglas de oro:</b></p>
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <span class="text-xl">🔒</span>
+                        <div>
+                            <h3 class="font-bold text-sm">Protege el máster</h3>
+                            <p class="text-[11px] text-gray-500">Nunca edites ni sobrescribas los archivos base. Utiliza siempre <b>"Duplicar"</b> o <b>"Hacer una copia"</b>.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-xl">✅</span>
+                        <div>
+                            <h3 class="font-bold text-sm">Aplica el QA</h3>
+                            <p class="text-[11px] text-gray-500">Todo material debe cumplir con sus respectivas <b>Consideraciones de uso</b> y estándares de calidad institucional antes de exportarse.</p>
+                        </div>
+                    </div>
+                    <div class="flex gap-4">
+                        <span class="text-xl">🛠️</span>
+                        <div>
+                            <h3 class="font-bold text-sm">Usa los recursos oficiales</h3>
+                            <p class="text-[11px] text-gray-500">En el menú lateral encontrarás las plantillas actualizadas, el sistema de color institucional y la Toolbox aprobada.</p>
+                        </div>
+                    </div>
+                </div>
+                <button onclick="closeRules()" class="w-full mt-8 bg-davda-primary text-white py-4 rounded-xl font-bold uppercase tracking-widest hover:bg-davda-dark transition-colors">
+                    Entendido y aceptado
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- PANEL LATERAL DE NOVEDADES -->
+    <aside id="newsPanel">
+        <div class="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50">
+            <h2 class="font-extrabold text-lg tracking-tight text-davda-dark">Registro de cambios</h2>
+            <button onclick="toggleNews()" class="text-gray-400 hover:text-davda-dark"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="flex-1 overflow-y-auto p-6 space-y-8 custom-scrollbar" id="newsContainer"></div>
+        <div class="p-6 border-t border-gray-100 bg-gray-50 text-[10px] text-gray-400 text-center">
+            Próxima depuración programada: <b>Noviembre 2026</b>
+        </div>
+    </aside>
+
     <div class="flex flex-1 overflow-hidden">
-        <!-- BARRA LATERAL DAVDA -->
+        
+        <!-- BARRA LATERAL DAVDA (Unificada con index.html) -->
         <aside id="mainSidebar" class="w-72 bg-davda-dark text-white flex flex-col z-20 shadow-2xl shrink-0">
             <div class="p-8 border-b border-white/5 flex flex-col items-center text-center">
                 <a href="javascript:void(0)" onclick="window.location.href='index.html'" class="w-full mb-4 flex items-center justify-center hover:opacity-80 transition-opacity">
-                    <img src="img/uniacc_logo.png" alt="Logo UNIACC" class="max-h-12 w-auto object-contain">
+                    <img src="img/uniacc_logo.png" alt="Logo UNIACC" class="max-h-12 w-auto object-contain" loading="lazy">
                 </a>
-                <h1 class="text-sm font-extrabold leading-tight tracking-tight uppercase">
-                    DAVDA <br><span class="text-davda-amarillo font-medium normal-case">Repositorio de Recursos Gráficos Multimedia</span>
+                <h1 class="text-sm font-extrabold leading-tight tracking-tight uppercase" style="color: #f5f5f5;">
+                    DAVDA <br><span class="font-medium normal-case">Recursos Gráficos Multimedia</span>
                 </h1>
             </div>
             
             <nav class="flex-1 overflow-y-auto p-4 space-y-1 custom-scrollbar">
-                <button onclick="window.location.href='index.html'" class="nav-link" id="btnAll">
+                <button onclick="window.location.href='index.html#top'" class="nav-link">
                     <i class="fas fa-layer-group mr-3"></i> Todo el repositorio
                 </button>
                 <div class="h-px bg-white/5 my-4"></div>
-                <button onclick="window.location.href='index.html#academicos'" class="nav-link">01 Académicos</button>
-                <button onclick="window.location.href='index.html#recursos-base'" class="nav-link">02 Recursos base</button>
-                <button onclick="window.location.href='index.html#plantillas'" class="nav-link">03 Plantillas</button>
-                <button onclick="window.location.href='index.html#infografias'" class="nav-link">04 Infografías</button>
-                <button onclick="window.location.href='index.html#video-animacion'" class="nav-link">06 Videos</button>
-                <button onclick="window.location.href='index.html#podcast'" class="nav-link">07 Podcast</button>
-                <button onclick="window.location.href='index.html#toolbox'" class="nav-link">08 Multimedia Toolbox</button>
-                <button onclick="window.location.href='index.html#tutoriales'" class="nav-link">09 Tutoriales</button>
-                <button onclick="window.location.href='index.html#casos-exito'" class="nav-link">10 Casos de éxito</button>
+                <button onclick="window.location.href='index.html#academicos'" class="nav-link">Académicos</button>
+                <button onclick="window.location.href='index.html#recursos-base'" class="nav-link">Recursos base</button>
+                <button onclick="window.location.href='index.html#video-animacion'" class="nav-link">Videos</button>
+                <button onclick="window.location.href='index.html#genially'" class="nav-link">Genially</button>
+                <button onclick="window.location.href='index.html#infografias'" class="nav-link">Infografías</button>
+                <button onclick="window.location.href='index.html#podcast'" class="nav-link">Podcast</button>
+                <button onclick="window.location.href='index.html#plantillas'" class="nav-link">Plantillas</button>
+                <button onclick="window.location.href='index.html#toolbox'" class="nav-link">Multimedia Toolbox</button>
+                <button onclick="window.location.href='index.html#tutoriales'" class="nav-link">Tutoriales</button>
+                <button onclick="window.location.href='index.html#casos-exito'" class="nav-link">Casos de éxito</button>
                 <div class="h-px bg-white/5 my-4"></div>
                 <button onclick="window.location.href='index.html#manual'" class="nav-link"><i class="fas fa-book mr-3"></i> Manual de Identidad Visual</button>
                 <button onclick="window.location.href='index.html#color'" class="nav-link"><i class="fas fa-palette mr-3"></i> Sistema de Color</button>
                 <button class="nav-link active-filter"><i class="fas fa-border-all mr-3"></i> Diseñador de retículas</button>
             </nav>
 
-            <div class="p-6 border-t border-white/5">
-                <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold text-center">
-                    ÚLTIMA EDICIÓN: <span style="color: #F5F5F5;">26 DE AGOSTO</span>, 2026
+            <div class="p-6 border-t border-white/5 text-center">
+                <p class="text-[10px] text-gray-500 uppercase tracking-widest font-bold">
+                    Última edición<br>
+                    <span style="color: #F5F5F5;">01 de octubre, 2026</span>
                 </p>
             </div>
         </aside>
 
         <main class="flex-1 flex flex-col bg-davda-bg">
-            <!-- HEADER DAVDA (Simplificado) -->
+            <!-- HEADER DAVDA (Unificado con index.html) -->
             <header class="h-24 flex items-center justify-between px-6 lg:px-10 bg-white border-b border-gray-200 shadow-sm z-10 shrink-0">
                 <div class="flex items-center gap-4">
                     <button onclick="toggleMobileMenu()" class="lg:hidden text-davda-dark text-xl p-2 hover:bg-gray-100 rounded-md transition-colors">
                         <i class="fas fa-bars"></i>
                     </button>
+                    <!-- Buscador global visual que redirige al inicio -->
+                    <div class="relative w-48 md:w-64" title="Ir al repositorio principal para buscar">
+                        <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs"></i>
+                        <input type="text" onclick="window.location.href='index.html'" placeholder="Buscar recursos..." class="w-full bg-gray-50 border border-gray-200 rounded-lg pl-8 pr-3 py-2 text-xs font-medium text-davda-dark focus:outline-none focus:border-davda-primary focus:bg-white transition-all cursor-pointer" readonly>
+                    </div>
                 </div>
                 
                 <div class="flex items-center gap-4">
+                    <button onclick="openRules()" class="text-[10px] font-bold uppercase text-gray-500 hover:text-davda-primary transition-colors flex items-center gap-2">
+                        <i class="fas fa-info-circle text-lg"></i> Reglas
+                    </button>
                     <div class="hidden sm:flex gap-2 p-2 bg-gray-50 border rounded-lg items-center text-[10px] font-semibold text-davda-grafito">
-                        <span class="text-gray-400 mr-1">Paleta hex:</span>
+                        <span class="text-gray-500 uppercase mr-1">Paleta hex:</span>
                         <button onclick="copyToClipboard('#2c66ff')" class="w-5 h-5 bg-[#2c66ff] rounded shadow-sm hover:scale-110 transition-transform"></button>
                         <button onclick="copyToClipboard('#ffa500')" class="w-5 h-5 bg-[#ffa500] rounded shadow-sm hover:scale-110 transition-transform"></button>
                         <button onclick="copyToClipboard('#ff01ff')" class="w-5 h-5 bg-[#ff01ff] rounded shadow-sm hover:scale-110 transition-transform"></button>
                         <button onclick="copyToClipboard('#F5F5F5')" class="w-5 h-5 bg-[#F5F5F5] rounded border shadow-sm hover:scale-110 transition-transform"></button>
                         <button onclick="copyToClipboard('#3d3838')" class="w-5 h-5 bg-[#3d3838] rounded shadow-sm hover:scale-110 transition-transform"></button>
                     </div>
+                    <button onclick="toggleNews()" class="relative p-2 text-gray-500 hover:text-davda-primary transition-colors">
+                        <i class="fas fa-bell text-xl"></i>
+                        <span id="badgeNews" class="news-badge"></span>
+                    </button>
                 </div>
             </header>
 
-            <!-- CONTENIDO PRINCIPAL MAQUETADOR CON MÁRGENES UNIFICADOS (p-12) -->
+            <!-- CONTENIDO PRINCIPAL MAQUETADOR -->
             <section class="flex-1 overflow-y-auto p-12 custom-scrollbar relative bg-davda-bg">
                 
                 <!-- Wrapper central unificado a 1200px max-width -->
@@ -420,11 +498,14 @@
                         </div>
                     </div>
 
-                    <!-- FOOTER INTERNO -->
-                    <footer class="border-t border-gray-200 pt-6 mt-12 pb-6 text-center">
-                        <p class="text-[11px] text-gray-500">
-                            Dudas o sugerencias: contactar al Coordinador Gráfico Multimedia, <a href="mailto:felipe.hernandez@uniacc.edu" class="text-davda-primary font-bold hover:underline">felipe.hernandez@uniacc.edu</a>.
-                        </p>
+                    <!-- FOOTER INTERNO UNIFICADO CON EL INDEX -->
+                    <footer class="border-t border-gray-200 py-4 mt-12 shrink-0">
+                        <div class="flex flex-col md:flex-row justify-between items-center gap-4 text-[11px] text-gray-500 footer-text w-full">
+                            <p class="text-left w-full md:w-auto">&copy; 2026 DAVDA. Todos los derechos reservados.</p>
+                            <p class="md:text-right w-full md:w-auto">
+                                Dudas o sugerencias: contactar al Coordinador Gráfico Multimedia, <a href="mailto:felipe.hernandez@uniacc.edu" class="text-davda-primary font-bold hover:underline">felipe.hernandez@uniacc.edu</a>.
+                            </p>
+                        </div>
                     </footer>
 
                 </div>
@@ -436,6 +517,44 @@
 
     <!-- SCRIPT DEL MAQUETADOR INTEGRADO -->
     <script>
+        const novedadesData = [
+            { fecha: "01 de octubre, 2026", titulo: "Implementación de ScrollSpy, ajustes de interfaz y actualización de Genially", desc: "Se habilitó la navegación fluida por anclas dinámicas (ScrollSpy) garantizando una detección precisa de la sección activa en el menú lateral. Además, la categoría 'Genially' fue reubicada e integra las nuevas plantillas 'Base interactivo' y 'Ejemplo interactivo UX'. Por último, se programó la próxima depuración del sistema para noviembre de 2026.", tipo: "Actualización" },
+            { fecha: "27 de agosto, 2026", titulo: "Integración de recursos para podcast y video", desc: "Se habilitó la tarjeta 'Audios' en la sección videos. En la sección podcast se incorporó el recurso 'ElevenLabs Español' y las consideraciones con recomendaciones vocales institucionales.", tipo: "Mejora" },
+            { fecha: "17 de junio, 2026", titulo: "Habilitación de packs audiovisuales institucionales", desc: "Se integraron exitosamente los recursos maestros para video correspondientes a las variantes cromáticas 'Pack Amarillo' y 'Pack Magenta' vinculando sus repositorios oficiales en Drive.", tipo: "Mejora" },
+            { fecha: "04 de junio, 2026", titulo: "Actualización del manual de identidad visual", desc: "Se reestructuró la sección con una nueva grilla de tarjetas que da acceso directo a los 5 volúmenes de lineamientos y presentaciones base.", tipo: "Mejora" },
+            { fecha: "04 de junio, 2026", titulo: "Lanzamiento del diseñador de retículas infográficas", desc: "Se integró una nueva herramienta avanzada para la creación y exportación de estructuras base y grillas constructivas en formato SVG.", tipo: "Mejora" },
+            { fecha: "29 de mayo, 2026", titulo: "Actualización de videos y bancos de stock", desc: "Se agregó la tarjeta de Miniatura para YouTube (.Ai) en la sección videos y los bancos gratuitos Pexels, Pixabay y Coverr.", tipo: "Mejora" },
+            { fecha: "14 de mayo, 2026", titulo: "Nuevas funcionalidades: deep linking y mobile UX", desc: "Se agregó el menú hamburguesa responsivo y soporte para enlaces directos (#seccion) para facilitar la colaboración.", tipo: "Mejora" },
+            { fecha: "05 de mayo, 2026", titulo: "Integración de multimedia toolbox y podcast", desc: "Se habilitaron los archivos de la sección podcast y la nueva categoría multimedia toolbox con herramientas de IA, programas y plugins.", tipo: "Mejora" },
+            { fecha: "15 de abril, 2026", titulo: "Actualización de recursos", desc: "Nuevos packs de video y consideraciones de reemplazo de imagen.", tipo: "Mejora" }
+        ];
+
+        function toggleNews() { 
+            document.getElementById('newsPanel').classList.toggle('open'); 
+            document.querySelector('.news-overlay').classList.toggle('open'); 
+            const badge = document.getElementById('badgeNews');
+            if(badge) badge.classList.add('hidden'); 
+            renderNews(); 
+        }
+
+        function renderNews() {
+            const container = document.getElementById('newsContainer');
+            if(!container) return;
+            container.innerHTML = novedadesData.map(n => `
+                <div class="border-l-2 border-davda-primary pl-4 py-1 mb-4">
+                    <div class="flex items-center gap-2 mb-1">
+                        <span class="text-[9px] font-bold px-2 py-0.5 rounded bg-davda-primary text-white">${n.tipo}</span>
+                        <span class="text-[10px] text-gray-500 font-bold">${n.fecha}</span>
+                    </div>
+                    <h4 class="font-bold text-sm mb-1 text-davda-dark">${n.titulo}</h4>
+                    <p class="text-xs text-gray-500 leading-relaxed">${n.desc}</p>
+                </div>
+            `).join('');
+        }
+
+        function openRules() { document.getElementById('rulesModal').style.display = 'flex'; }
+        function closeRules() { document.getElementById('rulesModal').style.display = 'none'; }
+
         function toggleMobileMenu() {
             document.getElementById('mainSidebar').classList.toggle('active');
             document.querySelector('.sidebar-overlay').classList.toggle('active');
@@ -751,7 +870,10 @@
         });
 
         downloadBtn.addEventListener('click', executeDownload);
-        window.addEventListener('DOMContentLoaded', renderLivePreview);
+        window.addEventListener('DOMContentLoaded', () => {
+            renderLivePreview();
+            renderNews();
+        });
     </script>
 </body>
 </html>
